@@ -8,3 +8,9 @@ A budgeting app to let you keep track of your expenses. This budgeting app gets 
 <img src="./readme-assets/add-transation.jpeg" alt="drawing" width="400"/>
 
 ## Features
+### Index
+### Add Transaction
+
+## Notes
+- [Tailwind](https://tailwindcss.com/)
+- [Tailwind cheatsheet](https://tailwindcomponents.com/cheatsheet/)
