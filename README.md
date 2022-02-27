@@ -17,5 +17,8 @@ A budgeting app to let you keep track of your expenses. This budgeting app gets 
 ### Add Transaction UI & Feature Requirements
 
 ## Notes
+- [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)
 - [Tailwind cheatsheet](https://tailwindcomponents.com/cheatsheet/)
+
+- [You Need a Budget (YNAB)](https://www.youneedabudget.com/)
