@@ -10,6 +10,7 @@ A budgeting app to let you keep track of your expenses. This budgeting app gets 
 
 ![UI for add-trasnation](./readme-assets/add-transation.jpeg)
 
+## Features
 
 ## User Stories for Index Page
 
