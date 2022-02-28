@@ -2,8 +2,8 @@
 A budgeting app to let you keep track of your expenses. This budgeting app gets its UI inspiration from the YNAB (You Need A Budget) app. It is meant to be a free-tier simplified version of YNAB that offers the core features only.
 
 ## Index Page UI
+- [Prototype](https://play.tailwindcss.com/KK1hMn2W3k) (icons didn't render well for me so I added ASCII chars for reference)
 <img src="./readme-assets/expense-tracker-index.jpeg" alt="drawing" width="400"/>
-[Index Page Prototype with Tailwind](https://play.tailwindcss.com/KK1hMn2W3k)
 
 ### Index Page UI & Features Requirements
 * Month-Year should be centered on "header"
