@@ -27,17 +27,17 @@ function Header() {
 	 return (
 		 <React.Fragment>
 				<header className="grid grid-cols-3 justify-items-center py-6">
-					<FontAwesomeIcon className="text-2xl lg:text-3xl pt-2" icon={faEllipsis} />
+					<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl pt-2" icon={faEllipsis} />
 					<h1>
-						<span className="text-4xl lg:text-5xl">Feb 2022</span>&nbsp;
-						<FontAwesomeIcon className="text-2xl lg:text-3xl pb-1 lg:pb-2" icon={faCircleChevronDown} />
+						<span className="text-3xl sm:text-4xl md:text-5xl">Feb 2022</span>&nbsp;
+						<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl pb-1 md:pb-2" icon={faCircleChevronDown} />
 					</h1>
-					<FontAwesomeIcon className="text-2xl lg:text-3xl pt-2" icon={faPenToSquare} />
+					<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl pt-2" icon={faPenToSquare} />
 				</header>
 		
-				<section className="grid grid-cols-2 justify-items-center py-3 text-gray-700">
-					<h2 className="text-xl lg:text-2xl">Assign your money</h2>
-					<FontAwesomeIcon className="text-xl lg:text-2xl" icon={faArrowRight} />
+				<section className="grid grid-cols-2 justify-items-center text-gray-700">
+					<h2 className="text-lg sm:text-xl md:text-2xl">Assign your money</h2>
+					<FontAwesomeIcon className="text-lg sm:text-xl md:text-2xl" icon={faArrowRight} />
 				</section>
 		 </React.Fragment>
 	 )

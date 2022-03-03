@@ -6,7 +6,7 @@ function Footer() {
 	 return (
 		 <React.Fragment>
 				<div className="text-center pt-14">
-					<FontAwesomeIcon className="text-2xl lg:text-3xl" icon={faCirclePlus} />
+					<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl" icon={faCirclePlus} />
 				</div>
 		 </React.Fragment>
 	 )
