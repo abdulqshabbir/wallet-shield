@@ -23,9 +23,9 @@ function ExpenseCategory({ categoryName }) {
 							<h2 className="text-xl font-semibold">{categoryName}</h2>
 							<h2 className="text-xl font-semibold">Amount Spent</h2>
 						</div>
-						<Expense expenseName="Movies"/>
-						<Expense expenseName="Internet"/>
-						<Expense expenseName="Dining Out"/>
+						<Expense expenseName="Movies" amount="10" max="20"/>
+						<Expense expenseName="Internet" amount="20" max="60"/>
+						<Expense expenseName="Dining Out" amount="60" max="80"/>
         </React.Fragment>
     )
 }

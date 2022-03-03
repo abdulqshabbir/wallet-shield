@@ -1,6 +1,6 @@
 import React from "react";
 
-function Expense({ expenseName }) {
+function Expense({ expenseName, amount, max }) {
 
     // return(
     //     <React.Fragment>
@@ -18,7 +18,7 @@ function Expense({ expenseName }) {
 		<React.Fragment>
 			<div className="grid grid-cols-2 justify-items-center py-3">
 				<p className="text-lg">{expenseName}</p>
-				<progress className="w-4/5 ring-2 rounded-lg ring-red-400" value="50" max="100"></progress>
+				<progress className="w-4/5 ring-2 rounded-lg ring-red-400" value={amount} max={max}></progress>
 			</div>
 		</React.Fragment>
 	)
