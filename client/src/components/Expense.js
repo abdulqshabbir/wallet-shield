@@ -18,7 +18,7 @@ function Expense({ expenseName, amount, max }) {
 		<React.Fragment>
 			<div className="grid grid-cols-2 justify-items-center py-3">
 				<p className="text-lg">{expenseName}</p>
-				<progress className="w-4/5 ring-2 rounded-lg ring-red-400" value={amount} max={max}></progress>
+				<progress className="w-4/5 ring-2 rounded-lg ring-red-400 mx-5" value={amount} max={max}></progress>
 			</div>
 		</React.Fragment>
 	)
