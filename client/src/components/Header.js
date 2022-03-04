@@ -27,15 +27,15 @@ function Header() {
 	 return (
 		 <React.Fragment>
 				<header className="grid grid-cols-3 justify-items-center py-6">
-					<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl pt-2" icon={faEllipsis} />
-					<h1>
+					<FontAwesomeIcon className="hover:text-blue-300 text-xl sm:text-2xl md:text-3xl pt-2" icon={faEllipsis} />
+					<h1 className="hover:text-blue-300">
 						<span className="text-3xl sm:text-4xl md:text-5xl">Feb 2022</span>
 						<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl pb-1 md:pb-2 pl-2 sm:pl-3 md:pl-4 lg:pl-6" icon={faCircleChevronDown} />
 					</h1>
-					<FontAwesomeIcon className="text-xl sm:text-2xl md:text-3xl pt-2" icon={faPenToSquare} />
+					<FontAwesomeIcon className="hover:text-blue-300 text-xl sm:text-2xl md:text-3xl pt-2" icon={faPenToSquare} />
 				</header>
 		
-				<section className="grid grid-cols-2 justify-items-center text-gray-700">
+				<section className="grid grid-cols-2 justify-items-center text-blue-900 hover:text-blue-300">
 					<h2 className="text-lg sm:text-xl md:text-2xl">Assign your money</h2>
 					<FontAwesomeIcon className="text-lg sm:text-xl md:text-2xl" icon={faArrowRight} />
 				</section>

@@ -17,27 +17,27 @@ function Sidebar() {
 	 return (
 		 <React.Fragment>
 			<div className="sidenav invisible xl:visible text-xl text-blue-200 bg-blue-900 pt-3">
-				<a className="mb-2" href="#a">
-					<FontAwesomeIcon className="text-lg pr-3" icon={faTree} />
+				<a className="hover:text-blue-50 mb-2" href="#a">
+					<FontAwesomeIcon className="hover:text-green-600 text-lg pr-3" icon={faTree} />
 					Abdul's Budget
 					<FontAwesomeIcon className="text-lg pl-3" icon={faCircleChevronDown} />
 				</a>
-				<a className="mb-2" href="#a">
+				<a className="hover:text-blue-50 mb-2" href="#a">
 					<FontAwesomeIcon className="text-lg pr-3" icon={faMoneyBill1Wave} />
 				Budget
 			  </a>
-				<a className="mb-2" href="#a">
+				<a className="hover:text-blue-50 mb-2" href="#a">
 					<FontAwesomeIcon className="text-lg pr-3" icon={faChartLine} />
 					Reports
 				</a>
-				<a className="mb-2" href="#a">
+				<a className="hover:text-blue-50 mb-2" href="#a">
 					<FontAwesomeIcon className="text-lg pr-3" icon={faBuildingColumns} />
 					All Accounts
 				</a>
 				<div className="mb-2 pl-4 bg-black">
 					{displayAccountMessage}
 				</div>
-				<a className="mb-2" href="#a">
+				<a className="hover:text-blue-50 mb-2" href="#a">
 					<FontAwesomeIcon className="text-lg pr-3" icon={faCirclePlus} />
 					Add Accounts
 				</a>

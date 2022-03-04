@@ -34,7 +34,3 @@ progress::-webkit-progress-value {
   text-decoration: none;
   display: block;
 }
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}

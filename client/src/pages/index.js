@@ -8,7 +8,7 @@ function App() {
 	return (
 		<div>
 			<Sidebar/>
-			<div className="sm:bg-red-200 md:bg-red-300 lg:bg-red-400 xl:bg-blue-400 xl:pl-24 text-gray-800">
+			<div className="h-screen sm:bg-red-200 md:bg-red-300 lg:bg-red-400 xl:bg-blue-400 xl:pl-24 text-gray-800">
 				<Header/>
 				<main>
 					<ExpenseCategory categoryName={"Immediate Obligations"}/> 
