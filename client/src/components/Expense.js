@@ -13,6 +13,7 @@ function Expense({ expenseName, amount, max }) {
     //         </li>
     //     </React.Fragment>
     // )
+
 	const width = (amount / max * 100) + '%'
 
 	return (
