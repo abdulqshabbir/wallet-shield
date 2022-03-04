@@ -1,17 +1,21 @@
 /* Tailwind only works properly for .js files not .jsx */
 import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 import ExpenseCategory from '../components/ExpenseCategory';
 import Footer from '../components/Footer';
 
 function App() {
 	return (
-	 	<div className="sm:bg-red-200 md:bg-red-300 lg:bg-red-500 xl:bg-red-600 text-gray-800">
-			<Header/>
-			<main>
-				<ExpenseCategory categoryName={"Immediate Obligations"}/> 
-				<ExpenseCategory categoryName={"Entertainment"}/> 
-			</main>
-			<Footer/>
+		<div>
+			<Sidebar/>
+			<div className="sm:bg-red-200 md:bg-red-300 lg:bg-red-400 xl:bg-blue-400 xl:pl-24 text-gray-800">
+				<Header/>
+				<main>
+					<ExpenseCategory categoryName={"Immediate Obligations"}/> 
+					<ExpenseCategory categoryName={"Entertainment"}/> 
+				</main>
+				<Footer/>
+			</div>
 		</div>
 	);
 }
