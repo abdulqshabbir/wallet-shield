@@ -13,12 +13,15 @@ function Expense({ expenseName, amount, max }) {
     //         </li>
     //     </React.Fragment>
     // )
+	const width = (amount / max * 100) + '%'
 
 	return (
 		<React.Fragment>
-			<div className="grid grid-cols-2 justify-items-center py-3">
-				<p className="text-lg">{expenseName}</p>
-				<progress className="w-4/5 ring-2 rounded-lg ring-red-400 mx-5" value={amount} max={max}></progress>
+			<div className="grid grid-cols-2 py-3 justify-items-center">
+				<p className="text-lg justify-self-center">{expenseName}</p>
+				<div className="w-5/6 bg-yellow-200 ring-2 rounded-lg ring-red-400">
+						<div style={{width: width}} className="w-1/3 h-full py-1 pl-1 ring-2 rounded-lg bg-green-400 text-green-800">${amount}/${max}</div>
+				</div>
 			</div>
 		</React.Fragment>
 	)
