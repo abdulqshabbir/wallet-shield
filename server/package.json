@@ -1,0 +1,16 @@
+{
+  "name": "expense-tracker-backend",
+  "version": "1.0.0",
+  "description": "Backend for expense-tracker app. Built using express and mySQL.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abdul Shabbir & Hassan Shabbir",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
