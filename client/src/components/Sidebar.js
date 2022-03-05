@@ -24,8 +24,8 @@ function Sidebar() {
 				</a>
 				<a className="hover:text-blue-50 mb-2" href="#a">
 					<FontAwesomeIcon className="text-lg pr-3" icon={faMoneyBill1Wave} />
-				Budget
-			  </a>
+					Budget
+				</a>
 				<a className="hover:text-blue-50 mb-2" href="#a">
 					<FontAwesomeIcon className="text-lg pr-3" icon={faChartLine} />
 					Reports
