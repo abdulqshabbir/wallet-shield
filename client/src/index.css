@@ -33,20 +33,3 @@ body              { font-size: min(max(0.8rem, 5vw), 1.25rem); }
 .footer           { font-size: min(max(0.8rem, 6vw), 1.375rem); }
 .header           { font-size: min(max(0.8rem, 8vw), 1.75rem); }
 .sidebar          { font-size: min(max(0.8rem, 7vw), 1.25rem); }
-
-/* on xl screens */
-@media (min-width: 1280px ) {
-  .shrink-on-xl{ 
-    display: flex;
-    position: relative;
-    left: 16%;
-    width: 84%;
-  }
-
-  .shrink-around {
-    justify-content: space-around;
-  }
-  .shrink-center {
-    justify-content: center;
-  }
-}

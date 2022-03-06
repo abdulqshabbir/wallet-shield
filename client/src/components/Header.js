@@ -5,7 +5,7 @@ import React from 'react'
 function Header() {
 	 return (
 		 <React.Fragment>
-				<header className="shrink-on-xl shrink-around header grid grid-cols-5 lg:grid-cols-3 justify-items-center py-4">
+				<header className="header grid grid-cols-5 lg:grid-cols-3 justify-items-center py-4">
 					<FontAwesomeIcon className="cursor-pointer pt-1 hover:text-blue-500" icon={faEllipsis} />
 					<h1 className="col-span-3 lg:col-span-1 cursor-pointer hover:text-blue-500">
 						<span className="">Feb&nbsp;2022</span>
