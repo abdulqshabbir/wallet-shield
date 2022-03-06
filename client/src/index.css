@@ -25,3 +25,11 @@
     margin-right: -100%;
     text-align: center;
 }
+
+/*                                     min     norm  max   */
+body              { font-size: min(max(0.8rem, 5vw), 20px); }
+.expense          { font-size: min(max(0.8rem, 5vw), 16px); }
+.expense-category { font-size: min(max(0.8rem, 6vw), 20px); }
+.footer           { font-size: min(max(0.8rem, 6vw), 22px); }
+.header           { font-size: min(max(0.8rem, 8vw), 28px); }
+.sidebar          { font-size: min(max(0.8rem, 7vw), 20px); }
