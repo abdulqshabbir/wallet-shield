@@ -14,9 +14,9 @@ function Header() {
 					<FontAwesomeIcon className="cursor-pointer pt-2 hover:text-blue-500" icon={faPenToSquare} />
 				</header>
 		
-				<section className="flex justify-center items-center">
+				<section className="xl:pl-56 xl:pr-10 flex justify-center items-center">
 					<h2 className="mr-4">Assign your money</h2>
-					<FontAwesomeIcon className="ml-4" icon={faArrowRight} />
+					<FontAwesomeIcon className="" icon={faArrowRight} />
 				</section>
 		 </React.Fragment>
 	 )
