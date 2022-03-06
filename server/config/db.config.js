@@ -1,8 +1,8 @@
-export const HOST = "127.0.0.1";
-export const USER = "root";
+export const HOST = "localhost";
+export const USER = "abdulshabbir";
 export const PASSWORD = "";
-export const DB = "expense-tracker";
-export const dialect = "mysql";
+export const DB = "abdulshabbir";
+export const dialect = "postgres";
 export const pool = {
   max: 5,
   min: 0,
