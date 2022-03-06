@@ -11,6 +11,9 @@
   "author": "Abdul Shabbir & Hassan Shabbir",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0"
   }
 }
