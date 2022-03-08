@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 
 function App() {
 	return (
-		<div className="bg-blue-100">
+		<div>
 			<Sidebar/>
 			<div className="h-screen">
 				<Header/>
