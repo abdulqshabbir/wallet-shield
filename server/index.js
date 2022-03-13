@@ -1,32 +1,32 @@
-import express from 'express';
-import cors from 'cors';
+import express from 'express'
+import cors from 'cors'
 import db from './config/db.config.js'
-import Expense from './models/Expense.js';
+import Expense from './models/Expense.js'
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+const app = express()
+const PORT = process.env.PORT || 4000
 
 try {
-    await db.authenticate();
-    console.log('Connection has been established successfully.');
+    await db.authenticate()
+    console.log('Connection has been established successfully.')
 } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error('Unable to connect to the database:', error)
 }
 
 
 // This runs the DROP TABLE IF EXISTS query
 (async () => {
-    await db.sync({ force: true });
-})();
+    await db.sync({ force: true })
+})()
 
 // allow all cross origin requests
-app.use(cors());
+app.use(cors())
 
 // parse incoming requests of content-type - application/json
-app.use(express.json());
+app.use(express.json())
 
 // parse incoming requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
 app.get("/expenses", (req, res) => {
     Expense.findAll()
@@ -54,4 +54,4 @@ app.post("/expenses", (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
-});
+})

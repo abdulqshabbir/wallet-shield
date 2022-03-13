@@ -11,6 +11,6 @@ const db = new Sequelize('abdulshabbir', 'abdulshabbir', '', {
     acquire: 30000,
     idle: 10000
   }
-});
+})
 
 export default db
