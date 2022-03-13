@@ -1,9 +1,9 @@
 /* Tailwind only works properly for .js files not .jsx */
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import ExpenseCategory from '../components/ExpenseCategory';
-import Footer from '../components/Footer';
-import Test from '../components/Test.js';
+import Sidebar from '../components/Sidebar'
+import Header from '../components/Header'
+import ExpenseCategory from '../components/ExpenseCategory'
+import Test from '../components/Test'
+import Footer from '../components/Footer'
 
 function App() {
 	return (
@@ -18,7 +18,7 @@ function App() {
 				<Footer/>
 			</div>
 		</div>
-	);
+	)
 }
   
-export default App;
+export default App
