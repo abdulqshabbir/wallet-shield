@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
 export default function Test() {
     const [name, setName] = useState('')
@@ -10,12 +10,16 @@ export default function Test() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ expenseName: name, expenseAmount: Number(amount), expenseMax: Number(max) })
-        };
+            body: JSON.stringify({ 
+							expenseName: name, 
+							expenseAmount: Number(amount),
+							expenseMax: Number(max) 
+						})
+        }
         fetch("http://localhost:4000/expenses", requestOptions)
             .then(response => response.json())
             .then(data => console.log(data))
-			.then(expenses => window.location.reload(false))
+						.then(() => window.location.reload(false))
             .catch(e => console.log(e))
     }
 

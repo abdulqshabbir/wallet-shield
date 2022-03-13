@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 function Expense({ expenseName, expenseAmount, expenseMax }) {
 	const width = (expenseAmount / expenseMax * 100) + '%'
@@ -14,4 +14,4 @@ function Expense({ expenseName, expenseAmount, expenseMax }) {
 	)
 }
 
-export default Expense;
+export default Expense

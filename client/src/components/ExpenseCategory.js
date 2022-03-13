@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Expense from "./Expense";
+import React, { useEffect, useState } from "react"
+import Expense from "./Expense"
 
 function ExpenseCategory({ categoryName }) {
 	const [expenses, setExpenses] = useState([])
