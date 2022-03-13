@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import ExpenseCategory from '../components/ExpenseCategory';
 import Footer from '../components/Footer';
+import Test from '../components/Test.js';
 
 function App() {
 	return (
@@ -12,8 +13,7 @@ function App() {
 				<Header/>
 				<main>
 					<ExpenseCategory categoryName={"Immediate Obligations"}/> 
-					<ExpenseCategory categoryName={"Entertainment"}/> 
-					<ExpenseCategory categoryName={"Entertainment"}/> 
+					<Test />
 				</main>
 				<Footer/>
 			</div>

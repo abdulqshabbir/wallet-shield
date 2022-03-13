@@ -19,12 +19,8 @@ try {
     await db.sync({ force: true });
 })();
 
-var corsOptions = {
-    origin: "http://localhost:3000"
-};
-
-// allow cross origin requests from our client
-app.use(cors(corsOptions));
+// allow all cross origin requests
+app.use(cors());
 
 // parse incoming requests of content-type - application/json
 app.use(express.json());
@@ -32,14 +28,21 @@ app.use(express.json());
 // parse incoming requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// this is a test route that works
 app.get("/expenses", (req, res) => {
-    const expense = {
-        expenseName: "Dominoes pizza"
-    }
+    Expense.findAll()
+    .then(expenses => {
+        res.status(200).json(expenses)
+    })
+    .catch(e => {
+        console.log(e)
+    })
+})
 
+app.post("/expenses", (req, res) => {
     Expense.create({
-        expenseName: expense.expenseName
+        expenseName: req.body.expenseName,
+        expenseAmount: req.body.expenseAmount,
+        expenseMax: req.body.expenseMax
     })
     .then(expense => {
         res.status(200).send(expense)
