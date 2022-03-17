@@ -51,12 +51,12 @@ app.post("/expenses", (req, res) => {
 			expenseAmount: eAmount,
 			expenseMax: eMax
 		})
-			.then(expense => {
-				res.status(200).send(expense)
-			})
-			.catch(e => {
-				console.log(e)
-			})
+		.then(expense => {
+			res.status(200).send(expense)
+		})
+		.catch(e => {
+			console.log(e)
+		})
 	}
 
 })
