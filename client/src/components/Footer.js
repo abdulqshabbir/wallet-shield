@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus, faCircleChevronDown, faMoneyBill1Wave, faChartLine, faBuildingColumns } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Footer() {
 	 return (
@@ -12,14 +13,14 @@ function Footer() {
 					<a className="hover:text-blue-400 text-center" href="#a">
 						<FontAwesomeIcon className="" icon={faMoneyBill1Wave} />
 					</a>
+					<Link to="/add-transaction" className='hover:text-blue-400 text-center'>
+						<FontAwesomeIcon className="" icon={faCirclePlus} />
+					</Link>
 					<a className="hover:text-blue-400 text-center" href="#a">
 						<FontAwesomeIcon className="" icon={faChartLine} />
 					</a>
 					<a className="hover:text-blue-400 text-center" href="#a">
 						<FontAwesomeIcon className="" icon={faBuildingColumns} />
-					</a>
-					<a className="hover:text-blue-400 text-center" href="#a">
-						<FontAwesomeIcon className="" icon={faCirclePlus} />
 					</a>
 				</div>
 		 </React.Fragment>
