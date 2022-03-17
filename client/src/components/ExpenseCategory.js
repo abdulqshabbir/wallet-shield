@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Expense from "./Expense"
 
-function ExpenseCategory({ categoryName }) {
-	const [expenses, setExpenses] = useState([])
-	useEffect(() => {
-		fetch("http://localhost:4000/expenses")
-			.then(res => res.json())
-			.then(expenses => setExpenses(expenses))
-			.catch(e => console.log(e))
-	}, [])
+function ExpenseCategory({ categoryName, expenses }) {
     return(
         <React.Fragment>
 						<div className="expense-category xl:pl-56 xl:pr-10 grid grid-cols-2 justify-items-center pt-6 pb-3 gap-y-4">
@@ -21,7 +14,9 @@ function ExpenseCategory({ categoryName }) {
 									key={i}
 									expenseName={e.expenseName}
 									expenseAmount={e.expenseAmount}
-									expenseMax={e.expenseMax} />)}
+									expenseMax={e.expenseMax} />
+							)
+						}
         </React.Fragment>
     )
 }

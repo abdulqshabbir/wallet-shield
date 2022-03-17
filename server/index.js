@@ -39,17 +39,26 @@ app.get("/expenses", (req, res) => {
 })
 
 app.post("/expenses", (req, res) => {
-	Expense.create({
-		expenseName: req.body.expenseName,
-		expenseAmount: req.body.expenseAmount,
-		expenseMax: req.body.expenseMax
-	})
-		.then(expense => {
-			res.status(200).send(expense)
+	const eName = req.body.expenseName
+	const eAmount = parseFloat(req.body.expenseAmount)
+	const eMax = parseFloat(req.body.expenseMax)
+
+	if (eName === '' || eAmount < 0 || eMax <= 0) {
+		res.status(400).send({ error: 'Invalid data sent' })
+	} else {
+		Expense.create({
+			expenseName: eName,
+			expenseAmount: eAmount,
+			expenseMax: eMax
 		})
-		.catch(e => {
-			console.log(e)
-		})
+			.then(expense => {
+				res.status(200).send(expense)
+			})
+			.catch(e => {
+				console.log(e)
+			})
+	}
+
 })
 
 app.listen(PORT, () => {
