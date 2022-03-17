@@ -5,7 +5,7 @@ export default function Test({ onSubmit }) {
 	const [amount, setAmount] = useState('')
 	const [max, setMax] = useState('')
 
-	function handleClick(e) {
+	function createNewExpense(e) {
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -47,7 +47,7 @@ export default function Test({ onSubmit }) {
 
 				<div></div>
 				<button type="submit" className="bg-blue-200 ring-1 rounded-md ring-blue-500 px-4 py-2"
-						onClick={e => handleClick(e)}>
+						onClick={e => createNewExpense(e)}>
 					Submit
 				</button>
 
