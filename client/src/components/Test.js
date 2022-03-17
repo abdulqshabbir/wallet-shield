@@ -20,7 +20,7 @@ export default function Test({ onSubmit }) {
 			.then(newExpense => {
 				if (name === '' || amount < 0 || max <= 0) {
 					console.error('Invalid data sent')
-				} else{
+				} else {
 					onSubmit(newExpense)
 					setName('')
 					setAmount('')
