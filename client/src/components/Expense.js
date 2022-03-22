@@ -2,13 +2,17 @@ import React from "react"
 
 function Expense({ expenseName, expenseAmount, expenseMax }) {
 	var style
-	var width
-	if (expenseAmount > expenseMax) {
-		style = ["font-thick bg-red-200 ring-red-600", "bg-red-300 text-red-600"]
-		width = ((expenseAmount - expenseMax ) / expenseMax * 100) + '%'
+	var width = (expenseAmount / expenseMax * 100) + '%'
+	if (expenseAmount < 0) {
+		width = (Math.abs(expenseAmount) / expenseMax * 100) + '%'
+		style = ["font-thick bg-red-200 ring-red-800", "bg-red-300 text-red-600"]
+	} else if (expenseAmount === expenseMax) {
+		style = ["font-thin bg-green-300 ring-green-800", "bg-green-200 text-gray-800"]
+	} else if (expenseAmount >= expenseMax) {
+		width = ((expenseAmount - expenseMax) / expenseMax * 100) + '%'
+		style = ["font-thin bg-green-200 ring-green-900", "bg-green-300 text-gray-800"]
 	} else {
-		style = ["font-thin bg-blue-300 ring-blue-800", "bg-blue-200 text-gray-800"]
-		width = (expenseAmount / expenseMax * 100) + '%'
+		style = ["font-thin bg-yellow-200 ring-yellow-800", "bg-yellow-100 text-gray-800"]
 	}
 
 	return (

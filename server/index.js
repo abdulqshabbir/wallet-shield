@@ -43,7 +43,7 @@ app.post("/expenses", (req, res) => {
 	const eAmount = parseFloat(req.body.expenseAmount)
 	const eMax = parseFloat(req.body.expenseMax)
 
-	if (eName === '' || eAmount < 0 || eMax <= 0) {
+	if (eName === '' || eMax <= 0) {
 		res.status(400).send({ error: 'Invalid data sent' })
 	} else {
 		Expense.create({
