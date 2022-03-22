@@ -4,41 +4,35 @@ import Header from '../components/Header'
 import ExpenseCategory from '../components/ExpenseCategory'
 import Test from '../components/Test'
 import Footer from '../components/Footer'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-class App extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = { expenses: [] }
-		this.submit = this.submit.bind(this)
-	}
+function App(props) {
+	const [state, setState] = useState({ expenses: [] })
 
-	componentDidMount() {
+	useEffect(() => {
 		fetch("http://localhost:4000/expenses")
 			.then(res => res.json())
-			.then(expenses => this.setState({ expenses: expenses }))
+			.then(expenses => setState({ expenses: expenses }))
 			.catch(e => console.log(e))
-	}
+	}, [])
 
-	submit(data) {
-		this.setState({ expenses: this.state.expenses.concat(data) })
+	function submit(data) {
+		setState({ expenses: state.expenses.concat(data) })
 	}
 	
-	render() {
-		return (
-			<div>
-				<Sidebar/>
-				<div className="h-screen">
-					<Header/>
-					<main>
-						<ExpenseCategory categoryName={"Immediate Obligations"} expenses={this.state.expenses}/> 
-						<Test onSubmit={(e) => this.submit(e)} />
-					</main>
-					<Footer/>
-				</div>
+	return (
+		<div>
+			<Sidebar/>
+			<div className="h-screen">
+				<Header/>
+				<main>
+					<ExpenseCategory categoryName={"Immediate Obligations"} expenses={state.expenses}/> 
+					<Test onSubmit={(e) => submit(e)} />
+				</main>
+				<Footer/>
 			</div>
-		)
-	}
+		</div>
+	)
 }
   
 export default App
