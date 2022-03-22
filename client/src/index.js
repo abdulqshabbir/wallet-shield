@@ -10,10 +10,11 @@ ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <Routes>
-        <Route path="/" element={<IndexPage />} />
+        <Route path="/" element={ <IndexPage /> } />
         <Route path="/categories" element={ <Categories /> } />
       </Routes>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')
 );
+

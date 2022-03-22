@@ -33,3 +33,14 @@ body              { font-size: min(max(0.8rem, 4vw),  1.25rem); }
 .footer           { font-size: min(max(0.8rem, 5vw), 1.375rem); }
 .header           { font-size: min(max(0.8rem, 6vw),  1.75rem); }
 .sidebar          { font-size: min(max(0.8rem, 6vw),  1.25rem); }
+
+
+/* hide up/down arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
