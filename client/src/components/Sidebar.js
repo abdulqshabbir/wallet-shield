@@ -7,11 +7,21 @@ function Sidebar() {
   const accounts = ['account1', 'account2', 'account3']
 	let displayAccountMessage
 	if (accounts.length === 0) {
-		displayAccountMessage = <div><h4 className="pt-3">No Accounts</h4><p className="py-5">You can't budget without adding accounts first. How about adding one now?</p></div>
+		displayAccountMessage = (
+			<div>
+				<h4 className="pt-3">No Accounts</h4>
+				<p className="py-5">You can't budget without adding accounts first. How about adding one now?</p>
+			</div>
+		)
 	} else {
-		displayAccountMessage = <div><h4 className="pt-3">Your Accounts</h4><ul className="py-5 pl-6">{
-			accounts.map((x, i) => <li className="list-disc py-2" key={i}>{x}</li>)
-		}</ul></div>
+		displayAccountMessage = (
+			<div>
+				<h4 className="pt-3">Your Accounts</h4>
+				<ul className="py-5 pl-6">
+					{ accounts.map((x, i) => <li className="list-disc py-2" key={i}>{x}</li>) }
+				</ul>
+			</div>
+		)
 	}
 
 	 return (

@@ -12,7 +12,7 @@ function Header() {
 					</Link>
 					<h1 className="col-span-3 lg:col-span-1 cursor-pointer hover:text-blue-400">
 						<span className="">Feb&nbsp;2022</span>
-							<FontAwesomeIcon className="pl-2" icon={faCircleChevronDown} />
+						<FontAwesomeIcon className="pl-2" icon={faCircleChevronDown} />
 					</h1>
 					<Link to="/categories">
 						<FontAwesomeIcon className="cursor-pointer pt-2 hover:text-blue-400" icon={faPenToSquare} />
