@@ -3,10 +3,16 @@ A budgeting app to let you keep track of your expenses. This budgeting app gets 
 
 ## General Features TODO list
 ### Create a Category
+* Clicking the pen icon on main page should redirect to /categories (UI shown below)
+* Clicking the folder icon in UI should give option to create new category name
+* Plus icon next to each category should give the option of adding an expense to a given category with a field to set the budget as well
 * select/add category, enter amount, select monthly/weekly/biweekly/yearly
 * if monthly, select due date
 * if weekly, select day (Mon-Sun), and calculate total based on days in current month
 * if yearly, select due date and calculate monthly goal by dividing the remaining by the months left
+
+### UI for /categories
+<img src="./readme-assets/categories.jpeg" alt="drawing" width="400"/>
 
 ### Delete a Category (NOTE: just hides the category in the hidden category-group)
 * (Optional:) Move money out of category for current month

@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleChevronDown, faTree, faMoneyBill1Wave, faChartLine, faBuildingColumns, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import {Link} from 'react-router-dom'
 import React from 'react'
 
 function Sidebar() {
@@ -16,11 +17,11 @@ function Sidebar() {
 	 return (
 		 <React.Fragment>
 			<div className="sidebar sidenav invisible xl:visible bg-blue-200 ring-1 pt-3">
-				<a className="hover:text-blue-400 mb-2" href="#a">
+				<Link className="hover:text-blue-400 mb-2" href="#a" to="/">
 					<FontAwesomeIcon className="pr-3" icon={faTree} />
-					Abdul's Budget
+						Abdul's Budget
 					<FontAwesomeIcon className="pl-3" icon={faCircleChevronDown} />
-				</a>
+				</Link>
 				<a className="hover:text-blue-400 mb-2" href="#a">
 					<FontAwesomeIcon className="pr-3" icon={faMoneyBill1Wave} />
 					Budget

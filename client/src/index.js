@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import IndexPage from './routes/Index'
-import AddTransaction from './routes/AddTransaction'
+import Categories from './routes/Categories'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 ReactDOM.render(
@@ -11,7 +11,7 @@ ReactDOM.render(
     <React.StrictMode>
       <Routes>
         <Route path="/" element={<IndexPage />} />
-        <Route path="/add-transaction" element={ <AddTransaction/> } />
+        <Route path="/categories" element={ <Categories /> } />
       </Routes>
     </React.StrictMode>
   </BrowserRouter>,
