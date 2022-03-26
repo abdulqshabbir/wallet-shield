@@ -41,16 +41,41 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 }
 
 function Category({ cName }) {
+	const [renderAddExpenseField, setRenderAddExpenseField] = useState(false)
 	return (
-		<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
-			<div className="w-3/4 flex justify-center items-center">
-				<h2 className="overflow-ellipsis">{cName}</h2>	
-				<FontAwesomeIcon className="ml-4" icon={faCircleMinus} />
+		<React.Fragment>
+			<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
+				<div className="w-3/4 flex justify-center items-center">
+					<h2 className="overflow-ellipsis">{cName}</h2>	
+					<FontAwesomeIcon className="ml-4" icon={faCircleMinus} />
+				</div>
+				<div className="w-1/4 flex justify-center items-center">
+					<FontAwesomeIcon className="hover:cursor-pointer" onClick={() => setRenderAddExpenseField(true)} icon={faCirclePlus} />
+					<FontAwesomeIcon className="ml-4" icon={faGripHorizontal} />
+				</div>
 			</div>
-			<div className="w-1/4 flex justify-center items-center">
-				<FontAwesomeIcon icon={faCirclePlus} />
-				<FontAwesomeIcon className="ml-4" icon={faGripHorizontal} />
-			</div>
-		</div>
+			<AddExpenseField renderField={renderAddExpenseField} setRenderField={setRenderAddExpenseField} />
+		</React.Fragment>
 	)
+}
+
+function AddExpenseField({ renderField, setRenderField }) {
+	if (renderField) {
+		return(
+			<div>
+				<div className="h-12 m-2 flex justify-center items-center">
+					<label className="w-1/2 text-center" htmlFor="eName">Expense Name:</label>
+					<input className="ml-4 w-1/2 max-w-xs border-2 border-gray-300 rounded-md" type="text" name="eName" id="eName"/>
+				</div>
+				<div className="h-12 m-2 flex justify-center items-center">
+					<label className="w-1/2 text-center" htmlFor="eMax">Monthly Budget:</label>
+					<input className="ml-4 w-1/2 max-w-xs border-2 border-gray-300 rounded-md" type="text" name="eMax" id="eMax"/>
+				</div>
+				<div className="flex justify-center items-center">
+					<button onClick={() => setRenderField(false)} className="h-12 w-1/2 max-w-xs my-4 border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
+				</div>
+			</div>
+		)
+	}
+	return null
 }
