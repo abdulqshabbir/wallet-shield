@@ -115,7 +115,7 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory, categories,
 }
 
 function AddExpenseField({ renderField, setRenderField, expenses, setExpenses, cId }) {
-	const [name, setName] = useState('')
+	const [name, setName] = useState("")
 	const [max, setMax] = useState("")
 
 	function handleClick() {
