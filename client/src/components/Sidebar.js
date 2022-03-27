@@ -1,10 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleChevronDown, faTree, faMoneyBill1Wave, faChartLine, faBuildingColumns, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import {Link} from 'react-router-dom'
-import React from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleChevronDown, faTree, faMoneyBill1Wave, faChartLine, faBuildingColumns, faCirclePlus } from "@fortawesome/free-solid-svg-icons"
+import {Link} from "react-router-dom"
+import React from "react"
 
 function Sidebar() {
-  const accounts = ['account1', 'account2', 'account3']
+  const accounts = ["account1", "account2", "account3"]
 	let displayAccountMessage
 	if (accounts.length === 0) {
 		displayAccountMessage = (

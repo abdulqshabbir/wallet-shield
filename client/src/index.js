@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import IndexPage from './routes/Index'
-import Categories from './routes/Categories'
+import React from "react"
+import ReactDOM from "react-dom"
+import "./index.css"
+import IndexPage from "./routes/Index"
+import Categories from "./routes/Categories"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 ReactDOM.render(
@@ -15,6 +15,6 @@ ReactDOM.render(
       </Routes>
     </React.StrictMode>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 

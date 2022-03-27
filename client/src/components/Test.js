@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 
 export default function Test({ onSubmit }) {
-	const [name, setName] = useState('')
-	const [amount, setAmount] = useState('')
-	const [max, setMax] = useState('')
+	const [name, setName] = useState("")
+	const [amount, setAmount] = useState("")
+	const [max, setMax] = useState("")
 
 	function createNewExpense(e) {
 		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ 
 				expenseName: name, 
 				expenseAmount: Number(amount),
@@ -18,13 +18,13 @@ export default function Test({ onSubmit }) {
 		fetch("http://localhost:4000/expenses", requestOptions)
 			.then(response => response.json())
 			.then(newExpense => {
-				if (name === '' || max <= 0) {
-					console.error('Invalid data sent')
+				if (name === "" || max <= 0) {
+					console.error("Invalid data sent")
 				} else {
 					onSubmit(newExpense)
-					setName('')
-					setAmount('')
-					setMax('')
+					setName("")
+					setAmount("")
+					setMax("")
 				}
 			})
 			.catch(e => console.log(e))

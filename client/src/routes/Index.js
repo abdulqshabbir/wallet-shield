@@ -1,11 +1,11 @@
 /* Tailwind only works properly for .js files not .jsx */
-import Sidebar from '../components/Sidebar'
-import Header from '../components/Header'
-import ExpenseCategory from '../components/ExpenseCategory'
-import Test from '../components/Test'
-import Footer from '../components/Footer'
-import React, { useState, useEffect } from 'react'
-import AssignMoney from '../components/AssignMoney'
+import Sidebar from "../components/Sidebar"
+import Header from "../components/Header"
+import ExpenseCategory from "../components/ExpenseCategory"
+import Test from "../components/Test"
+import Footer from "../components/Footer"
+import React, { useState, useEffect } from "react"
+import AssignMoney from "../components/AssignMoney"
 
 function App(props) {
 	const [state, setState] = useState({ expenses: [] })

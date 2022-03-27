@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faPenToSquare, faCircleChevronDown, faTree } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
-import React from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPenToSquare, faCircleChevronDown, faTree } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "react-router-dom"
+import React from "react"
 
 function Header() {
 	 return (
@@ -11,7 +11,7 @@ function Header() {
 						<FontAwesomeIcon className="cursor-pointer pt-1 hover:text-blue-400" icon={faTree} />
 					</Link>
 					<h1 className="col-span-3 lg:col-span-1 cursor-pointer hover:text-blue-400">
-						<span className="">Feb&nbsp;2022</span>
+						<span>Feb&nbsp;2022</span>
 						<FontAwesomeIcon className="pl-2" icon={faCircleChevronDown} />
 					</h1>
 					<Link to="/categories">
