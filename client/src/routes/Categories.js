@@ -24,7 +24,7 @@ export default function Categories() {
 				<main>
 					<div onClick={() => setRenderAddCategory(true)} className="h-14 flex flex-wrap justify-center items-center bg-gray-200 hover:bg-gray-300 cursor-pointer">
 						<h2 className="mr-8 text-xl">Add New Category</h2>
-						<FontAwesomeIcon icon={faFolderPlus} size="lg"/>
+						<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
 					</div>
 					<AddCategoryField 
 						renderAddCategory={renderAddCategory}
@@ -36,27 +36,32 @@ export default function Categories() {
 						categories={categories}
 						expenses={expenses}
 						setExpenses={setExpenses}
+						setCategories={setCategories}
 					/>
 				</main>
 		</React.Fragment>
 	)
 }
 
-function RenderCategories({ categories, expenses, setExpenses }) {
-	return categories.map(c => <Category key={c.cId} cName={c.cName} cId={c.cId} expenses={expenses} setExpenses={setExpenses}/> )
+function RenderCategories({ categories, expenses, setExpenses, setCategories }) {
+	return categories.map(c => <Category key={c.cId} categories={categories} category={c} expenses={expenses} setExpenses={setExpenses} setCategories={setCategories}/> )
 }
 
-function Category({ cName, cId, expenses, setExpenses }) {
+function Category({ category, expenses, setExpenses, categories, setCategories }) {
 	const [renderAddExpenseField, setRenderAddExpenseField] = useState(false)
+	function deleteCategory(cId) {
+		setExpenses(expenses.filter(e => e.cId !== cId))
+		setCategories(categories.filter(c => c.cId !== cId))
+	}
 	return (
 		<React.Fragment>
 			<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
 				<div className="w-3/4 flex justify-center items-center">
-					<h2 className="overflow-ellipsis">{cName}</h2>	
-					<FontAwesomeIcon className="ml-4" icon={faCircleMinus} />
+					<h2 className="overflow-ellipsis">{category.cName}</h2>	
+					<FontAwesomeIcon onClick={() => deleteCategory(category.cId)} className="ml-4 cursor-pointer hover:scale-125" icon={faCircleMinus} />
 				</div>
 				<div className="w-1/4 flex justify-center items-center">
-					<FontAwesomeIcon className="hover:cursor-pointer hover:scale-125" onClick={() => setRenderAddExpenseField(true)} icon={faCirclePlus} />
+					<FontAwesomeIcon onClick={() => setRenderAddExpenseField(true)} className="hover:cursor-pointer hover:scale-125" icon={faCirclePlus} />
 					<FontAwesomeIcon className="ml-4" icon={faGripHorizontal} />
 				</div>
 			</div>
@@ -65,9 +70,9 @@ function Category({ cName, cId, expenses, setExpenses }) {
 				setRenderField={setRenderAddExpenseField}
 				expenses={expenses}
 				setExpenses={setExpenses}
-				cId={cId}
+				cId={category.cId}
 			/>
-			<RenderExpenses cId={cId} expenses={expenses} />
+			<RenderExpenses cId={category.cId} expenses={expenses} />
 		</React.Fragment>
 	)
 }
