@@ -4,14 +4,10 @@ import Header from "../components/Header"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleMinus, faCirclePlus, faFolderPlus, faGripHorizontal } from "@fortawesome/free-solid-svg-icons"
 import { useCategories } from "../contexts/Categories"
+import { useExpenses } from "../contexts/Expenses"
 
 export default function Categories() {
-	const [ renderAddCategory, setRenderAddCategory ] = useState(false)
-	const [expenses, setExpenses] = useState([
-		{eId: 1, cId: 1, eName: "Groceries", eMax: 100},
-		{eId: 2, cId: 2, eName: "Rent", eMax: 1000},
-		{eId: 3, cId: 1, eName: "Internet", eMax: 40}
-	])
+	const [renderAddCategory, setRenderAddCategory] = useState(false)
 
 	return (
 		<React.Fragment>
@@ -22,31 +18,28 @@ export default function Categories() {
 						<h2 className="mr-8 text-xl">Add New Category</h2>
 						<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
 					</div>
-					<AddCategoryField 
-						renderAddCategory={renderAddCategory}
-						setRenderAddCategory={setRenderAddCategory}
-					/>
-					<RenderCategories
-						expenses={expenses}
-						setExpenses={setExpenses}
-					/>
+					<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
+					<RenderCategories/>
 				</main>
 		</React.Fragment>
 	)
 }
 
-function RenderCategories({ expenses, setExpenses }) {
+function RenderCategories() {
 	const [categories, _] = useCategories()
-	return categories.map(c => <Category key={c.cId} category={c} expenses={expenses} setExpenses={setExpenses} /> )
+	return categories.map(c => <Category key={c.cId} category={c} /> )
 }
 
-function Category({ category, expenses, setExpenses }) {
+function Category({ category }) {
 	const [categories, setCategories] = useCategories()
+	const [expenses, setExpenses] = useExpenses()
 	const [renderAddExpenseField, setRenderAddExpenseField] = useState(false)
+
 	function deleteCategory(cId) {
 		setExpenses(expenses.filter(e => e.cId !== cId))
 		setCategories(categories.filter(c => c.cId !== cId))
 	}
+
 	return (
 		<React.Fragment>
 			<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
@@ -62,8 +55,6 @@ function Category({ category, expenses, setExpenses }) {
 			<AddExpenseField
 				renderField={renderAddExpenseField}
 				setRenderField={setRenderAddExpenseField}
-				expenses={expenses}
-				setExpenses={setExpenses}
 				cId={category.cId}
 			/>
 			<RenderExpenses cId={category.cId} expenses={expenses} />
@@ -87,7 +78,7 @@ function Expense({ expense }) {
 function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	const [categories, setCategories] = useCategories()
 	const [cName, setcName] = useState("")
-	function handleClick() {
+	function createNewCategory() {
 		// TODO: use proper id for cId not Math.random
 		setCategories([...categories, {cName, cId: Math.random()*1000}])
 		setcName("")
@@ -106,7 +97,7 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 					/>	
 				</div>
 				<div className="flex justify-center items-center">
-					<button onClick={() => handleClick()} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
+					<button onClick={() => createNewCategory()} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
 				</div>
 			</React.Fragment>
 		)
@@ -114,11 +105,12 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	return null
 }
 
-function AddExpenseField({ renderField, setRenderField, expenses, setExpenses, cId }) {
+function AddExpenseField({ renderField, setRenderField, cId }) {
+	const [expenses, setExpenses] = useExpenses()
 	const [name, setName] = useState("")
 	const [max, setMax] = useState("")
 
-	function handleClick() {
+	function createNewExpense() {
 		setRenderField(false)
 		setExpenses([...expenses, { eName: name, eMax: max, cId }])
 		setName("")
@@ -146,7 +138,7 @@ function AddExpenseField({ renderField, setRenderField, expenses, setExpenses, c
 					/>
 				</div>
 				<div className="flex justify-center items-center">
-					<button onClick={handleClick} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
+					<button onClick={createNewExpense} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
 				</div>
 			</div>
 		)

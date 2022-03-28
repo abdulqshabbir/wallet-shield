@@ -5,16 +5,19 @@ import IndexPage from "./routes/Index"
 import Categories from "./routes/Categories"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import CategoriesProvider from "./contexts/Categories"
+import ExpensesProvider from "./contexts/Expenses"
 
 ReactDOM.render(
   // browser router connects our react app to the browser URL
   <React.StrictMode>
     <BrowserRouter>
       <CategoriesProvider>
-        <Routes>
-            <Route path="/" element={ <IndexPage /> } />
-            <Route path="/categories" element={ <Categories /> } />
-        </Routes>
+        <ExpensesProvider>
+          <Routes>
+              <Route path="/" element={ <IndexPage /> } />
+              <Route path="/categories" element={ <Categories /> } />
+          </Routes>
+        </ExpensesProvider>
       </CategoriesProvider>
     </BrowserRouter>
   </React.StrictMode>,
