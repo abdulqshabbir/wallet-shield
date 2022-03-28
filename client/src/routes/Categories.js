@@ -3,14 +3,10 @@ import Sidebar from "../components/Sidebar"
 import Header from "../components/Header"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleMinus, faCirclePlus, faFolderPlus, faGripHorizontal } from "@fortawesome/free-solid-svg-icons"
+import { useCategories } from "../contexts/Categories"
 
 export default function Categories() {
-	const [renderAddCategory, setRenderAddCategory] = useState(false)
-	const [categories, setCategories] = useState([
-		{cId: 1, cName: "ImmediateObligations" },
-		{cId: 2, cName: "School Expenses" },
-		{cId: 3, cName: "Monthly Budget" }
-	])
+	const [ renderAddCategory, setRenderAddCategory ] = useState(false)
 	const [expenses, setExpenses] = useState([
 		{eId: 1, cId: 1, eName: "Groceries", eMax: 100},
 		{eId: 2, cId: 2, eName: "Rent", eMax: 1000},
@@ -29,25 +25,23 @@ export default function Categories() {
 					<AddCategoryField 
 						renderAddCategory={renderAddCategory}
 						setRenderAddCategory={setRenderAddCategory}
-						categories={categories}
-						setCategories={setCategories}
 					/>
 					<RenderCategories
-						categories={categories}
 						expenses={expenses}
 						setExpenses={setExpenses}
-						setCategories={setCategories}
 					/>
 				</main>
 		</React.Fragment>
 	)
 }
 
-function RenderCategories({ categories, expenses, setExpenses, setCategories }) {
-	return categories.map(c => <Category key={c.cId} categories={categories} category={c} expenses={expenses} setExpenses={setExpenses} setCategories={setCategories}/> )
+function RenderCategories({ expenses, setExpenses }) {
+	const [categories, _] = useCategories()
+	return categories.map(c => <Category key={c.cId} category={c} expenses={expenses} setExpenses={setExpenses} /> )
 }
 
-function Category({ category, expenses, setExpenses, categories, setCategories }) {
+function Category({ category, expenses, setExpenses }) {
+	const [categories, setCategories] = useCategories()
 	const [renderAddExpenseField, setRenderAddExpenseField] = useState(false)
 	function deleteCategory(cId) {
 		setExpenses(expenses.filter(e => e.cId !== cId))
@@ -78,7 +72,7 @@ function Category({ category, expenses, setExpenses, categories, setCategories }
 }
 
 function RenderExpenses({ cId, expenses }) {
-	return expenses.filter(e => e.cId === cId).map(e => <Expense expense={e} />)	
+	return expenses.filter(e => e.cId === cId).map(e => <Expense key={e.eId} expense={e} />)	
 }
 
 function Expense({ expense }) {
@@ -90,7 +84,8 @@ function Expense({ expense }) {
 	)
 }
 
-function AddCategoryField({ renderAddCategory, setRenderAddCategory, categories, setCategories }) {
+function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
+	const [categories, setCategories] = useCategories()
 	const [cName, setcName] = useState("")
 	function handleClick() {
 		// TODO: use proper id for cId not Math.random
