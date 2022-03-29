@@ -74,7 +74,12 @@ A budgeting app to let you keep track of your expenses. This budgeting app gets 
 <img src="./readme-assets/add-transation.jpeg" alt="drawing" width="400"/>
 
 ### Add Transaction UI & Feature Requirements
-* TODO
+* Clicking the "+" icon on the footer should redirect to /add-transaction
+* Create a toggle UI for toggling between expenses and income. Create field for storing numerical value. Store state in React.
+* Create a category field which shows a dropdown of all categories. Store state in React.
+* Create a date field which defaults to today. When date is clicked it should open up a calendar to change date. Store state in React.
+* Create a memo field to store a note with transaction. Store state in React.
+* Clicking the save transaction button can just log the state of the component for now
 
 ## Notes
 - [React](https://reactjs.org/)
