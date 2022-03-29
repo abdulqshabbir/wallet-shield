@@ -1,26 +1,14 @@
 /* Tailwind only works properly for .js files not .jsx */
 import Sidebar from "../components/Sidebar"
 import Header from "../components/Header"
-import ExpenseCategory from "../components/ExpenseCategory"
-import Test from "../components/Test"
 import Footer from "../components/Footer"
-import React, { useState, useEffect } from "react"
+import React from "react"
 import AssignMoney from "../components/AssignMoney"
+import Expense from "../components/Expense"
+import { useCategories } from '../contexts/Categories'
+import { useExpenses } from '../contexts/Expenses'
 
 function App(props) {
-	const [state, setState] = useState({ expenses: [] })
-
-	useEffect(() => {
-		fetch("http://localhost:4000/expenses")
-			.then(res => res.json())
-			.then(expenses => setState({ expenses: expenses }))
-			.catch(e => console.log(e))
-	}, [])
-
-	function submit(data) {
-		setState({ expenses: state.expenses.concat(data) })
-	}
-	
 	return (
 		<div>
 			<Sidebar/>
@@ -28,13 +16,43 @@ function App(props) {
 				<Header/>
 				<AssignMoney />
 				<main>
-					<ExpenseCategory categoryName={"Immediate Obligations"} expenses={state.expenses}/> 
-					<Test onSubmit={(e) => submit(e)} />
+					<Budget />
 				</main>
 				<Footer/>
 			</div>
 		</div>
 	)
+}
+
+function Budget() {
+	const [categories, ] = useCategories()
+	const [expenses, ] = useExpenses()
+	return categories.map(category =>
+		<RenderExpensesWithinCategories
+			expenses={expenses.filter(expense => expense.cId === category.cId)}
+			categoryName={category.cName}
+		/>)
+}
+
+
+function RenderExpensesWithinCategories({ categoryName, expenses }) {
+    return (
+        <React.Fragment>
+			<div className="expense-category xl:pl-56 xl:pr-10 grid grid-cols-2 justify-items-center pt-6 pb-3 gap-y-4">
+				<h2 className="font-semibold">{categoryName}</h2>
+				<h2 className="font-semibold">Amount Spent</h2>
+			</div>
+			{
+				expenses.map((e, i) => 
+					<Expense
+						key={e.Id}
+						expenseName={e.eName}
+						expenseAmount={e.spent}
+						expenseMax={e.eMax} />
+				)
+			}
+        </React.Fragment>
+    )
 }
   
 export default App

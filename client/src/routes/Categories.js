@@ -112,7 +112,7 @@ function AddExpenseField({ renderField, setRenderField, cId }) {
 
 	function createNewExpense() {
 		setRenderField(false)
-		setExpenses([...expenses, { eName: name, eMax: max, cId }])
+		setExpenses([...expenses, { eName: name, eMax: max, cId, spent: 0 }])
 		setName("")
 		setMax("")
 	}
