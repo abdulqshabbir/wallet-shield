@@ -13,7 +13,7 @@ export default function Categories() {
 		<React.Fragment>
 			<Sidebar/>
 				<Header/>
-				<main>
+				<main className="xl:pl-56">
 					<div onClick={() => setRenderAddCategory(true)} className="h-14 flex flex-wrap justify-center items-center bg-gray-200 hover:bg-gray-300 cursor-pointer">
 						<h2 className="mr-8 text-xl">Add New Category</h2>
 						<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
@@ -87,17 +87,19 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	if (renderAddCategory) {
 		return (
 			<React.Fragment>
-				<div className="h-12 my-4 mx-8 flex flex-wrap justify-between items-center">
-					<label className="w-1/2" htmlFor="cName" placeholder="Category Name">Category Name:</label>
-					<input
-						onChange={e => setcName(e.target.value)}
-						value={cName}
-						placeholder="Category Name"
-						className="w-1/2 h-10 p-2 border-2 border-gray-300 rounded-md" type="text" name="cName" id="cName"
-					/>	
-				</div>
-				<div className="flex justify-center items-center">
-					<button onClick={() => createNewCategory()} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
+				<div className="xl:pl-32">
+					<div className="h-12 my-4 mx-8 flex flex-wrap justify-between items-center">
+						<label className="w-1/2" htmlFor="cName" placeholder="Category Name">Category Name:</label>
+						<input
+							onChange={e => setcName(e.target.value)}
+							value={cName}
+							placeholder="Category Name"
+							className="w-1/2 h-10 p-2 border-2 border-gray-300 rounded-md" type="text" name="cName" id="cName"
+						/>
+					</div>
+					<div className="flex justify-center items-center">
+						<button onClick={() => createNewCategory()} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
+					</div>
 				</div>
 			</React.Fragment>
 		)
@@ -118,7 +120,7 @@ function AddExpenseField({ renderField, setRenderField, cId }) {
 	}
 	if (renderField) {
 		return(
-			<div>
+			<div className="xl:pl-32">
 				<div className="h-12 my-4 mx-8 flex justify-between items-center">
 					<label className="w-1/2" htmlFor="eName">Expense Name:</label>
 					<input
