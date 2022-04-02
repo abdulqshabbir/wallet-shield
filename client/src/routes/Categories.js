@@ -27,7 +27,7 @@ export default function Categories() {
 
 function RenderCategories() {
 	const [categories, _] = useCategories()
-	return categories.map(c => <Category key={c.cId} category={c} /> )
+	return categories.map(c => <Category key={c.id} category={c} /> )
 }
 
 function Category({ category }) {
@@ -35,17 +35,17 @@ function Category({ category }) {
 	const [expenses, setExpenses] = useExpenses()
 	const [renderAddExpenseField, setRenderAddExpenseField] = useState(false)
 
-	function deleteCategory(cId) {
-		setExpenses(expenses.filter(e => e.cId !== cId))
-		setCategories(categories.filter(c => c.cId !== cId))
+	function deleteCategory(id) {
+		setExpenses(expenses.filter(e => e.cId !== id))
+		setCategories(categories.filter(c => c.cId !== id))
 	}
 
 	return (
 		<React.Fragment>
 			<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
 				<div className="w-3/4 flex justify-center items-center">
-					<h2 className="overflow-ellipsis">{category.cName}</h2>	
-					<FontAwesomeIcon onClick={() => deleteCategory(category.cId)} className="ml-4 cursor-pointer hover:scale-125" icon={faCircleMinus} />
+					<h2 className="overflow-ellipsis">{category.name}</h2>	
+					<FontAwesomeIcon onClick={() => deleteCategory(category.id)} className="ml-4 cursor-pointer hover:scale-125" icon={faCircleMinus} />
 				</div>
 				<div className="w-1/4 flex justify-center items-center">
 					<FontAwesomeIcon onClick={() => setRenderAddExpenseField(true)} className="hover:cursor-pointer hover:scale-125" icon={faCirclePlus} />
@@ -55,22 +55,22 @@ function Category({ category }) {
 			<AddExpenseField
 				renderField={renderAddExpenseField}
 				setRenderField={setRenderAddExpenseField}
-				cId={category.cId}
+				cId={category.id}
 			/>
-			<RenderExpenses cId={category.cId} expenses={expenses} />
+			<RenderExpenses cId={category.id} expenses={expenses} />
 		</React.Fragment>
 	)
 }
 
 function RenderExpenses({ cId, expenses }) {
-	return expenses.filter(e => e.cId === cId).map(e => <Expense key={e.eId} expense={e} />)	
+	return expenses.filter(e => e.cId === cId).map(e => <Expense key={e.id} expense={e} />)	
 }
 
 function Expense({ expense }) {
 	return (
 		<div className="flex flex-row flex-wrap justify-between border-b-2 border-b-gray-200">
-			<h3 className="w-3/4 flex justify-center items-center">{expense.eName}</h3>
-			<p className="w-1/4 flex justify-center items-center">{expense.eMax} CAD</p>
+			<h3 className="w-3/4 flex justify-center items-center">{expense.name}</h3>
+			<p className="w-1/4 flex justify-center items-center">{expense.max} CAD</p>
 		</div>
 	)
 }
@@ -80,7 +80,7 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	const [cName, setcName] = useState("")
 	function createNewCategory() {
 		// TODO: use proper id for cId not Math.random
-		setCategories([...categories, {cName, cId: Math.random()*1000}])
+		setCategories([...categories, {name: cName, id: Math.random()*1000}])
 		setcName("")
 		setRenderAddCategory(false)
 	}
@@ -112,7 +112,7 @@ function AddExpenseField({ renderField, setRenderField, cId }) {
 
 	function createNewExpense() {
 		setRenderField(false)
-		setExpenses([...expenses, { eName: name, eMax: max, cId, spent: 0 }])
+		setExpenses([...expenses, { name: name, max: max, cId: cId, remaining: max, id: Math.random()*1000 }])
 		setName("")
 		setMax("")
 	}

@@ -29,8 +29,9 @@ function Budget() {
 	const [expenses, ] = useExpenses()
 	return categories.map(category =>
 		<RenderExpensesWithinCategories
-			expenses={expenses.filter(expense => expense.cId === category.cId)}
-			categoryName={category.cName}
+			key={Math.random()*1000}
+			expenses={expenses.filter(expense => expense.cId === category.id)}
+			categoryName={category.name}
 		/>)
 }
 
@@ -43,12 +44,12 @@ function RenderExpensesWithinCategories({ categoryName, expenses }) {
 				<h2 className="font-semibold">Amount Spent</h2>
 			</div>
 			{
-				expenses.map((e, i) => 
+				expenses.map((e) => 
 					<Expense
-						key={e.Id}
-						expenseName={e.eName}
-						expenseAmount={e.spent}
-						expenseMax={e.eMax} />
+						key={e.id}
+						expenseName={e.name}
+						expenseAmount={e.remaining}
+						expenseMax={e.max} />
 				)
 			}
         </React.Fragment>

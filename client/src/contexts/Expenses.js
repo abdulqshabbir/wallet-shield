@@ -4,9 +4,9 @@ const Expenses = React.createContext()
 
 //TODO: remove later, just for demonstration
 const defaultExpenses = [
-    {eId: 1, cId: 1, eName: "Groceries", eMax: 100, spent: 90},
-    {eId: 2, cId: 2, eName: "Rent", eMax: 1000, spent: 500},
-    {eId: 3, cId: 1, eName: "Internet", eMax: 40, spent: 10}
+    {id: 1, cId: 1, name: "Groceries", max: 100, remaining: 100},
+    {id: 2, cId: 2, name: "Rent", max: 1000, remaining: 1000},
+    {id: 3, cId: 1, name: "Internet", max: 40, remaining: 40}
 ]
 
 export function useExpenses() {

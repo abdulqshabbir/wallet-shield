@@ -4,9 +4,8 @@ const Categories = React.createContext()
 
 //TODO: remove later, just for demonstration
 const defaultCategories = [
-    {cId: 1, cName: "ImmediateObligations" },
-    {cId: 2, cName: "School Expenses" },
-    {cId: 3, cName: "Monthly Budget" }
+    {id: 1, name: "ImmediateObligations" },
+    {id: 2, name: "School Expenses" },
 ]
 
 export function useCategories() {
