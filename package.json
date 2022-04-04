@@ -4,6 +4,9 @@
   "description": "Backend for expense-tracker app. Built using express and mySQL.",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "14.17.2"
+  },
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
