@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import db from './config/db.config.js'
 import Expense from './models/Expense.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -27,6 +29,15 @@ app.use(express.json())
 
 // parse incoming requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+
+app.use(express.static(path.join(__dirname, "client/build")))
+
+app.get("/", (req, res) => {
+	res.sendFile('index.html')
+})
 
 app.get("/expenses", (req, res) => {
 	Expense.findAll()
