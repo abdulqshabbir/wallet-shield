@@ -12,7 +12,12 @@ const DB_PORT = process.env.DB_PORT
 const devConnection = `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 
 const prodConnection = process.env.DATABASE_URL
+console.log(devConnection)
 
-const db = new Sequelize(process.env.NODE_ENV === "production" ? prodConnection : devConnection);
+const db = new Sequelize(process.env.NODE_ENV === "production" ? prodConnection : devConnection, {
+    dialectOptions: {
+        ssl: process.env.NODE_ENV === "production" ? true : false
+    }
+});
 
 export default db
