@@ -33,12 +33,10 @@ app.use(express.urlencoded({ extended: true }))
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
 
-app.use(express.static(path.join(__dirname, "client/build")))
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "client/build")))
 
-app.get("/", (req, res) => {
-	res.sendFile('index.html')
-})
-
+}
 app.get("/expenses", (req, res) => {
 	Expense.findAll()
 		.then(expenses => {
