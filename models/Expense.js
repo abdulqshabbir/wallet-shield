@@ -1,19 +1,25 @@
 import { Sequelize} from 'sequelize'
 import db from '../config/db.config.js'
+import Category from './Category'
 
 const Expense = db.define("expense", {
-    expenseName: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    expenseAmount: {
+    max: {
         type: Sequelize.FLOAT,
         allowNull: false
     },
-    expenseMax: {
+    remaining: {
         type: Sequelize.FLOAT,
-        allowNull: false
+        allowNull: false,
+        default: max
     }
 })
+
+// Set up one-to-one relationship between expense and category
+// Adds a categoryId attribute to Expense table
+Expense.belongsTo(Category)
 
 export default Expense

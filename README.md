@@ -1,6 +1,23 @@
 # Live Site
 Site is live!  Find it at https://expense-tracker-ynab.herokuapp.com/
 
+## Database tables
+
+# Expense Table
+| Table Attribute | Type  |
+| ------------- |:-------------:|
+| id | INT |
+| name| VARCHAR|
+| max | FLOAT |
+| remaining | FLOAT |
+| categoryId | FOREIGN KEY to Category Table |
+
+# Category Table
+| Table Attribute | Type  |
+| ------------- |:-------------:|
+| id | INT |
+| name| VARCHAR|
+
 # Expense-Tracker
 A budgeting app to let you keep track of your expenses. This budgeting app gets its UI inspiration from the YNAB (You Need A Budget) app. It is meant to be a free-tier simplified version of YNAB that offers the core features only.
 
