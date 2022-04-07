@@ -4,6 +4,7 @@ import db from './config/db.config.js'
 import Expense from './models/Expense.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import Category from './models/Category.js'
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -14,7 +15,6 @@ try {
 } catch (error) {
 	console.error('Unable to connect to the database:', error)
 }
-
 
 // This runs the DROP TABLE IF EXISTS query
 (async () => {
@@ -43,28 +43,55 @@ app.get("/expenses", (req, res) => {
 			res.status(200).json(expenses)
 		})
 		.catch(e => {
+			res.status(400).send({error: "Internal server error"})
 			console.log(e)
 		})
 })
 
-app.post("/expenses", (req, res) => {
-	const eName = req.body.expenseName
-	const eAmount = parseFloat(req.body.expenseAmount)
-	const eMax = parseFloat(req.body.expenseMax)
+app.post("/categories", (req, res) => {
+	const name = req.body.name
+	Category.create({
+		name
+	}).then (category => {
+		res.status(200).send(category)
+	}).catch(e => {
+		res.status(400).send({error: "Internal server error"})
+		console.log(e)
+	})
+})
 
-	if (eName === '' || eMax <= 0) {
+app.get("/categories", (req, res) => {
+	Category.findAll()
+		.then(categories => {
+			res.status(200).send(categories)
+		})
+		.catch(e => {
+			console.log(e)
+			res.status(400).send({error: "Internal server error"})
+		})
+})
+
+app.post("/expenses", (req, res) => {
+	const name = req.body.name
+	const remaining = parseFloat(req.body.remaining)
+	const max = parseFloat(req.body.max)
+	const categoryId = req.body.categoryId
+
+	if ( isNaN(remaining) || isNaN(max) || max <= 0 || remaining <= 0) {
 		res.status(400).send({ error: 'Invalid data sent' })
 	} else {
 		Expense.create({
-			expenseName: eName,
-			expenseAmount: eAmount,
-			expenseMax: eMax
+			name,
+			remaining,
+			max,
+			categoryId
 		})
 		.then(expense => {
 			res.status(200).send(expense)
 		})
 		.catch(e => {
 			console.log(e)
+			res.status(400).send({error: "Internal server error"})
 		})
 	}
 

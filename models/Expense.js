@@ -1,6 +1,6 @@
 import { Sequelize} from 'sequelize'
 import db from '../config/db.config.js'
-import Category from './Category'
+import Category from './Category.js'
 
 const Expense = db.define("expense", {
     name: {
@@ -13,8 +13,7 @@ const Expense = db.define("expense", {
     },
     remaining: {
         type: Sequelize.FLOAT,
-        allowNull: false,
-        default: max
+        allowNull: false
     }
 })
 
