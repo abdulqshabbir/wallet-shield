@@ -1,19 +1,19 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import getCategories from "../services/getCategories"
 
 const Categories = React.createContext()
-
-//TODO: remove later, just for demonstration
-const defaultCategories = [
-    {id: 1, name: "ImmediateObligations" },
-    {id: 2, name: "School Expenses" },
-]
 
 export function useCategories() {
     return React.useContext(Categories)
 }
 
 export default function CategoriesProvider({ children }) {
-    const [ categories, setCategories ] = useState(defaultCategories)
+    const [ categories, setCategories ] = useState([])
+    useEffect(() => {
+        getCategories()
+           .then(categories => setCategories(categories))
+           .catch(e => console.log(e))
+    }, [])
     return(
         <Categories.Provider value={[categories, setCategories]}>
             {children}

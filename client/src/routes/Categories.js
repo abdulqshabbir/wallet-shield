@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleMinus, faCirclePlus, faFolderPlus, faGripHorizontal } from "@fortawesome/free-solid-svg-icons"
 import { useCategories } from "../contexts/Categories"
 import { useExpenses } from "../contexts/Expenses"
+import createCategory from '../services/createCategory'
 
 export default function Categories() {
 	const [renderAddCategory, setRenderAddCategory] = useState(false)
@@ -27,7 +28,7 @@ export default function Categories() {
 
 function RenderCategories() {
 	const [categories, _] = useCategories()
-	return categories.map(c => <Category key={c.id} category={c} /> )
+	return categories.map(c => <Category key={Math.random()*1000} category={c} /> )
 }
 
 function Category({ category }) {
@@ -78,9 +79,10 @@ function Expense({ expense }) {
 function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	const [categories, setCategories] = useCategories()
 	const [cName, setcName] = useState("")
-	function createNewCategory() {
+	async function createNewCategory() {
 		// TODO: use proper id for cId not Math.random
-		setCategories([...categories, {name: cName, id: Math.random()*1000}])
+		const result = await createCategory(cName)
+		setCategories([...categories, { name: cName }])
 		setcName("")
 		setRenderAddCategory(false)
 	}

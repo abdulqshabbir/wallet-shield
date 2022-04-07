@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "client/build")))
 
 }
-app.get("/expenses", (req, res) => {
+app.get("/api/expenses", (req, res) => {
 	Expense.findAll()
 		.then(expenses => {
 			res.status(200).json(expenses)
@@ -48,7 +48,7 @@ app.get("/expenses", (req, res) => {
 		})
 })
 
-app.post("/categories", (req, res) => {
+app.post("/api/categories", (req, res) => {
 	const name = req.body.name
 	Category.create({
 		name
@@ -60,7 +60,7 @@ app.post("/categories", (req, res) => {
 	})
 })
 
-app.get("/categories", (req, res) => {
+app.get("/api/categories", (req, res) => {
 	Category.findAll()
 		.then(categories => {
 			res.status(200).send(categories)
@@ -71,7 +71,7 @@ app.get("/categories", (req, res) => {
 		})
 })
 
-app.post("/expenses", (req, res) => {
+app.post("/api/expenses", (req, res) => {
 	const name = req.body.name
 	const remaining = parseFloat(req.body.remaining)
 	const max = parseFloat(req.body.max)
