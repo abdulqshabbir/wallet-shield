@@ -6,6 +6,7 @@ import { faCircleMinus, faCirclePlus, faFolderPlus, faGripHorizontal } from "@fo
 import { useCategories } from "../contexts/Categories"
 import { useExpenses } from "../contexts/Expenses"
 import createCategory from '../services/createCategory'
+import createExpense from '../services/createExpense'
 
 export default function Categories() {
 	const [renderAddCategory, setRenderAddCategory] = useState(false)
@@ -64,7 +65,9 @@ function Category({ category }) {
 }
 
 function RenderExpenses({ cId, expenses }) {
-	return expenses.filter(e => e.cId === cId).map(e => <Expense key={e.id} expense={e} />)	
+	return expenses
+	.filter(e => e.categoryId === cId)
+	.map(e => <Expense key={e.id} expense={e} />)	
 }
 
 function Expense({ expense }) {
@@ -115,10 +118,15 @@ function AddExpenseField({ renderField, setRenderField, cId }) {
 	const [max, setMax] = useState("")
 
 	function createNewExpense() {
-		setRenderField(false)
-		setExpenses([...expenses, { name: name, max: max, cId: cId, remaining: max, id: Math.random()*1000 }])
-		setName("")
-		setMax("")
+		createExpense(name, max, max, cId)
+			.then(res => {
+				setRenderField(false)
+				setName("")
+				setMax("")
+			})
+			.catch(e => {
+				console.log(e)
+			})
 	}
 	if (renderField) {
 		return(

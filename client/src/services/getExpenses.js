@@ -1,5 +1,5 @@
-export default function getCategories() {
-    return fetch("/api/categories")
+export default function getExpenses() {
+    return fetch("/api/expenses")
     .then(res => {
         if (res.status === 200) {
             return res.json()

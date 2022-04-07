@@ -11,7 +11,11 @@ export default function CategoriesProvider({ children }) {
     const [ categories, setCategories ] = useState([])
     useEffect(() => {
         getCategories()
-           .then(categories => setCategories(categories))
+           .then(categories => {
+               if (categories !== null) {
+                setCategories(categories)
+               }
+           })
            .catch(e => console.log(e))
     }, [])
     return(
