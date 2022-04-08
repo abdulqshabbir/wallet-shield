@@ -15,10 +15,11 @@ const Expense = db.define("expense", {
         type: Sequelize.FLOAT,
         allowNull: false
     }
+    // categoryId added by sequelize
+    // id added by sequelize
 })
 
 // Set up one-to-one relationship between expense and category
-// Adds a categoryId attribute to Expense table
 Expense.belongsTo(Category)
 
 export default Expense

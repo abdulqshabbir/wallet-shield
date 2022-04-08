@@ -30,7 +30,7 @@ function Budget() {
 	return categories.map(category =>
 		<RenderExpensesWithinCategories
 			key={Math.random()*1000}
-			expenses={expenses.filter(expense => expense.cId === category.id)}
+			expenses={expenses.filter(expense => expense.categoryId === category.id)}
 			categoryName={category.name}
 		/>)
 }
