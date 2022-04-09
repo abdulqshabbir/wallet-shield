@@ -40,11 +40,11 @@ function Category({ category }) {
 	return (
 		<React.Fragment>
 			<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
-				<div className="w-3/4 flex justify-center items-center">
+				<div className="mx-8 flex justify-center items-center">
 					<h2 className="overflow-ellipsis">{category.name}</h2>	
 					<FontAwesomeIcon className="ml-4 cursor-pointer hover:scale-125" icon={faCircleMinus} />
 				</div>
-				<div className="w-1/4 flex justify-center items-center">
+				<div className="mx-8 flex justify-center items-center">
 					<FontAwesomeIcon onClick={() => setRenderAddExpenseField(true)} className="hover:cursor-pointer hover:scale-125" icon={faCirclePlus} />
 					<FontAwesomeIcon className="ml-4" icon={faGripHorizontal} />
 				</div>
@@ -68,8 +68,8 @@ function RenderExpenses({ cId, expenses }) {
 function Expense({ expense }) {
 	return (
 		<div className="flex flex-row flex-wrap justify-between border-b-2 border-b-gray-200">
-			<h3 className="w-3/4 flex justify-center items-center">{expense.name}</h3>
-			<p className="w-1/4 flex justify-center items-center">{expense.max} CAD</p>
+			<h3 className="mx-8 flex justify-center items-center">{expense.name}</h3>
+			<p className="mx-8 flex justify-center items-center">{expense.max} CAD</p>
 		</div>
 	)
 }
@@ -93,7 +93,7 @@ function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	if (renderAddCategory) {
 		return (
 			<React.Fragment>
-				<div className="xl:pl-32">
+				<div>
 					<div className="h-12 my-2 mx-8 flex flex-wrap justify-between items-center">
 						<label className="w-1/2" htmlFor="cName" placeholder="Category Name">Category Name:</label>
 						<input
@@ -139,7 +139,7 @@ function AddExpenseField({ renderField, setRenderField, cId }) {
 	}
 	if (renderField) {
 		return(
-			<div className="xl:pl-32">
+			<div>
 				<div className="h-12 my-4 mx-8 flex justify-between items-center">
 					<label className="w-1/2" htmlFor="eName">Expense Name:</label>
 					<input

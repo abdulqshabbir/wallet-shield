@@ -3,7 +3,7 @@ import React from "react"
 function Expense({ expenseName, expenseAmount, expenseMax }) {
 	return (
 		<React.Fragment>
-			<div className="h-16 px-4 flex flex-wrap justify-between items-center border-b-[1px] border-b-primaryGray-200">
+			<div className="h-16 px-4 flex flex-wrap justify-between items-center border-b-[1px] border-x-[1px]">
 				<div className="w-3/4">
 					<h4 className="font-light mb-1">{expenseName}</h4>
 					<ProgressBar name={expenseName} amount={expenseAmount} max={expenseMax} />

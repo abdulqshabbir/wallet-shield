@@ -7,7 +7,7 @@ import React from "react"
 function Header() {
 	 return (
 		 <React.Fragment>
-				<header className="header grid grid-cols-5 lg:grid-cols-3 justify-items-center pt-4 pb-2 border-b-[1px] border-b-primaryGray-200">
+				<header className="header grid grid-cols-5 lg:grid-cols-3 justify-items-center pt-4 pb-2 border-b-[1px] border-x-[1px]">
 					<Link to="/">
 						<FontAwesomeIcon
 							className="cursor-pointer pt-1 hover:text-blue-400"
