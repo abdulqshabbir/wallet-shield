@@ -1,13 +1,13 @@
 /* Tailwind only works properly for .js files not .jsx */
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import React from "react"
+import React, { useState } from "react"
 import AssignMoney from "../components/AssignMoney"
 import Expense from "../components/Expense"
 import { useCategories } from '../contexts/Categories'
 import { useExpenses } from '../contexts/Expenses'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 function App(props) {
 	return (
@@ -46,24 +46,34 @@ function Budget() {
 
 
 function RenderExpensesWithinCategories({ categoryName, expenses }) {
+	const [ showExpenses, setShowExpenses ] = useState(true)
+
+	let fontIcon = faAngleDown
+	if (!showExpenses) {
+		fontIcon = faAngleRight
+	}
+
+	let Expenses
+	if (showExpenses) {
+		Expenses = expenses.map(e => <Expense key={e.id} expenseName={e.name} expenseAmount ={e.remaining} expenseMax={e.max} />)
+	} else {
+		Expenses = null
+	}
+
     return (
         <React.Fragment>
 			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[0.5px] border-y-primaryGray-300">
 				<div className="text-normal font-semibold flex justify-center items-center">
-					<FontAwesomeIcon icon={faAngleDown} />
+					<FontAwesomeIcon
+						className="hover:cursor-pointer hover:scale-125"
+						icon={fontIcon}
+						onClick={() => setShowExpenses(!showExpenses)}
+					/>
 					<p className="ml-2">{categoryName}</p>
 				</div>
 				<h2 className="font-light text-gray-700">{`1100CAD`}</h2>
 			</div>
-			{
-				expenses.map((e) => 
-					<Expense
-						key={e.id}
-						expenseName={e.name}
-						expenseAmount={e.remaining}
-						expenseMax={e.max} />
-				)
-			}
+			{ Expenses }
         </React.Fragment>
     )
 }

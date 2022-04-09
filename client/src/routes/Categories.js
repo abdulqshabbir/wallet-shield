@@ -12,18 +12,18 @@ export default function Categories() {
 	const [renderAddCategory, setRenderAddCategory] = useState(false)
 
 	return (
-		<React.Fragment>
-			<Sidebar/>
-				<Header/>
-				<main className="xl:pl-56">
-					<div onClick={() => setRenderAddCategory(true)} className="h-14 flex flex-wrap justify-center items-center bg-gray-200 hover:bg-gray-300 cursor-pointer">
-						<h2 className="mr-8 text-xl">Add New Category</h2>
-						<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
-					</div>
-					<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
-					<RenderCategories/>
-				</main>
-		</React.Fragment>
+		<div className="min-w-content max-w-5xl mx-auto">
+			{/* <Sidebar/> */}
+			<Header/>
+			<main>
+				<div onClick={() => setRenderAddCategory(true)} className="h-14 flex flex-wrap justify-center items-center bg-gray-200 hover:bg-gray-300 cursor-pointer">
+					<h2 className="mr-8 text-xl">Add New Category</h2>
+					<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
+				</div>
+				<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
+				<RenderCategories/>
+			</main>
+		</div>
 	)
 }
 
