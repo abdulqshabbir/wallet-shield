@@ -15,7 +15,7 @@ export default async function createExpense(name, max, remaining, categoryId) {
     try {
         validateArguments(name, max, remaining, categoryId)
         let res = await fetch("/api/expenses", opts)
-        let newExpense = res.json()
+        let newExpense = await res.json()
         return newExpense
     } catch(e) {
         throw new Error(e) 
