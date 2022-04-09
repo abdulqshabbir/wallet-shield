@@ -37,6 +37,7 @@ function Budget() {
 				key={Math.random()*1000}
 				expenses={expenses.filter(expense => expense.categoryId === category.id)}
 				categoryName={category.name}
+				categoryId={category.id}
 			/>)
 		}
 
@@ -45,11 +46,13 @@ function Budget() {
 }
 
 
-function RenderExpensesWithinCategories({ categoryName, expenses }) {
+function RenderExpensesWithinCategories({ categoryName, expenses, categoryId }) {
 	const [ showExpenses, setShowExpenses ] = useState(true)
 
-	let fontIcon = faAngleDown
-	if (!showExpenses) {
+	let fontIcon
+	if (showExpenses) {
+		fontIcon = faAngleDown
+	} else {
 		fontIcon = faAngleRight
 	}
 
@@ -63,19 +66,24 @@ function RenderExpensesWithinCategories({ categoryName, expenses }) {
     return (
         <React.Fragment>
 			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[0.5px] border-y-primaryGray-300">
-				<div className="text-normal font-semibold flex justify-center items-center">
+				<div onClick={() => setShowExpenses(!showExpenses)} className="text-normal font-semibold flex justify-center items-center hover:cursor-pointer">
 					<FontAwesomeIcon
 						className="hover:cursor-pointer hover:scale-125"
 						icon={fontIcon}
-						onClick={() => setShowExpenses(!showExpenses)}
 					/>
 					<p className="ml-2">{categoryName}</p>
 				</div>
-				<h2 className="font-light text-gray-700">{`1100CAD`}</h2>
+				<h2 className="font-light text-gray-700">{`${totalRemainingInCategory(categoryId, expenses)} CAD`}</h2>
 			</div>
 			{ Expenses }
         </React.Fragment>
     )
+}
+
+function totalRemainingInCategory(id, expenses) {
+	return expenses
+		.filter(expense => expense.categoryId === id)
+		.reduce((acc, e) => acc + e.remaining, 0)
 }
   
 export default App
