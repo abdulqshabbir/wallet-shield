@@ -20,7 +20,7 @@ function Footer() {
 						<FontAwesomeIcon className="" icon={faChartLine} />
 					</a>
 					<a className="hover:text-blue-400 text-center" href="#a">
-						<FontAwesomeIcon className="" icon={faBuildingColumns} />
+						<FontAwesomeIcon className="" icon={faBuildingColumns} color="green"/>
 					</a>
 				</div>
 		 </React.Fragment>

@@ -1,12 +1,12 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function AssignMoney () {
     return (
-        <section className="pt-4 flex justify-center items-center hover:text-blue-400">
-            <h2 className="mr-4">Assign your money</h2>
-            <FontAwesomeIcon className="" icon={faArrowRight} />
+        <section className="h-16 flex justify-center items-center bg-primaryGray-100">
+            <div className="h-12 w-full mx-4 flex flex-wrap justify-center items-center bg-primaryGray-200 rounded-md md:w-80">
+                <span>Assign Money</span>
+                <span className="text-primaryGray-300"> {`>`} </span>
+            </div>
         </section>
     )
 }
