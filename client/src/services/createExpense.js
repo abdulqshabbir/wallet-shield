@@ -1,4 +1,4 @@
-export default function createExpense(name, max, remaining, categoryId) {
+export default async function createExpense(name, max, remaining, categoryId) {
     const opts = {
         method: "POST",
         body: JSON.stringify({
@@ -12,16 +12,19 @@ export default function createExpense(name, max, remaining, categoryId) {
         }
     }
 
-    validateArguments(name, max, remaining, categoryId)
-   
-    return fetch("/api/expenses", opts)
-        .then(data => data.json())
-        .catch(e => console.log(e))
+    try {
+        validateArguments(name, max, remaining, categoryId)
+        let res = await fetch("/api/expenses", opts)
+        let newExpense = res.json()
+        return newExpense
+    } catch(e) {
+        throw new Error(e) 
+    }
 }
 
 function validateArguments(name, max, remaining, categoryId) {
-    if (typeof name !== "string") {
-        throw new Error("Expense name must be a string")
+    if (typeof name !== "string" || !isNaN(name)) {
+        throw new Error("Expense name cannot be a number")
     }
     else if (typeof max !== "number" || isNaN(max)) {
         throw new Error("Max budget for the month must be a number")
