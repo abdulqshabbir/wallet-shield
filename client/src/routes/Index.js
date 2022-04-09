@@ -10,14 +10,12 @@ import { useExpenses } from '../contexts/Expenses'
 
 function App(props) {
 	return (
-		<div>
-			<Sidebar/>
+		<div className="min-w-content max-w-5xl mx-auto">
+			{/* <Sidebar/> */}
 			<div className="h-screen">
 				<Header/>
 				<AssignMoney />
-				<main>
-					<Budget />
-				</main>
+				<Budget />
 				<Footer/>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ import React from "react"
 function Header() {
 	 return (
 		 <React.Fragment>
-				<header className="header xl:pl-56 xl:pr-10 grid grid-cols-5 lg:grid-cols-3 justify-items-center pt-4 pb-2 bg-blue-200 ring-1">
+				<header className="header grid grid-cols-5 lg:grid-cols-3 justify-items-center pt-4 pb-2 bg-blue-200 ring-1">
 					<Link to="/">
 						<FontAwesomeIcon className="cursor-pointer pt-1 hover:text-blue-400" icon={faTree} />
 					</Link>

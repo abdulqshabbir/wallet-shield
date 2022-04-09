@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 function Footer() {
 	 return (
 		 <React.Fragment>
-			 <div className="footer xl:invisible grid grid-cols-5 justify-content-center content-center justify-around px-12 fixed bottom-0 w-full h-14 sm:h-16 z-10 bg-blue-200 ring-1">
+			 <div className="footer grid grid-cols-5 justify-content-center content-center justify-around px-12 fixed bottom-0 w-full max-w-5xl mx-auto h-14 z-10 bg-blue-200 ring-1">
 					<a className="hover:text-blue-400 text-center" href="#a">
 						<FontAwesomeIcon className="" icon={faCircleChevronDown} />
 					</a>
