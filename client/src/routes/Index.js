@@ -13,7 +13,7 @@ function App(props) {
 	return (
 		<div className="min-w-content max-w-5xl mx-auto">
 			{/* <Sidebar/> */}
-			<div className="h-screen border-x-[1px]">
+			<div className="h-screen">
 				<Header/>
 				<AssignMoney />
 				<Budget />
@@ -28,7 +28,7 @@ function Budget() {
 	const [expenses, ] = useExpenses()
 	return (
 		<React.Fragment>
-			<div className="h-14 px-4 flex flex-wrap justify-between items-center border-y-[1px] border-x-[1px]">
+			<div className="h-14 px-4 flex flex-wrap justify-between items-center border-y-[1px]">
 				<h3 className="text-base text-gray-500">CATEGORY</h3>
 				<h3 className="text-base text-gray-500">AVAILABLE</h3>
 			</div>	
@@ -64,7 +64,7 @@ function RenderExpensesWithinCategories({ categoryName, expenses, categoryId }) 
 
     return (
         <React.Fragment>
-			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px] border-x-[1px]">
+			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px]">
 				<div onClick={() => setShowExpenses(!showExpenses)} className="text-normal font-semibold flex justify-center items-center hover:cursor-pointer">
 					<FontAwesomeIcon
 						className="hover:cursor-pointer hover:scale-125"

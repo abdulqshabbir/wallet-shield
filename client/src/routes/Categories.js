@@ -16,9 +16,11 @@ export default function Categories() {
 			{/* <Sidebar/> */}
 			<Header/>
 			<main>
-				<div onClick={() => setRenderAddCategory(true)} className="h-14 flex flex-wrap justify-center items-center bg-gray-200 hover:bg-gray-300 cursor-pointer">
-					<h2 className="mr-8 text-xl">Add New Category</h2>
-					<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
+				<div onClick={() => setRenderAddCategory(true)} className="h-20 flex flex-wrap justify-center items-center cursor-pointer">
+					<button className="h-14 px-8 py-2 text-xl bg-primaryGray-200 hover:bg-gray-200 rounded-lg">
+						<span className="mr-4">Add New Category</span>
+						<FontAwesomeIcon className="hover:scale-125" icon={faFolderPlus} size="lg"/>
+					</button>
 				</div>
 				<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
 				<RenderCategories/>
@@ -39,8 +41,8 @@ function Category({ category }) {
 
 	return (
 		<React.Fragment>
-			<div className="h-12 flex justify-between bg-gray-100 border-b-2 border-gray-200">
-				<div className="mx-8 flex justify-center items-center">
+			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px] border-x-[1px]">
+					<div className="mx-8 flex justify-center items-center">
 					<h2 className="overflow-ellipsis">{category.name}</h2>	
 					<FontAwesomeIcon className="ml-4 cursor-pointer hover:scale-125" icon={faCircleMinus} />
 				</div>
@@ -67,7 +69,7 @@ function RenderExpenses({ cId, expenses }) {
 
 function Expense({ expense }) {
 	return (
-		<div className="flex flex-row flex-wrap justify-between border-b-2 border-b-gray-200">
+		<div className="h-16 px-4 flex flex-wrap justify-between items-center border-b-[1px]">
 			<h3 className="mx-8 flex justify-center items-center">{expense.name}</h3>
 			<p className="mx-8 flex justify-center items-center">{expense.max} CAD</p>
 		</div>
