@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Header from "../components/Header"
+import SiteWrapper from "../components/SiteWrapper"
 
 export default function Categories() {
     const [ isLeft, setIsLeft ] = useState(false)
@@ -12,8 +13,7 @@ export default function Categories() {
     }
 
 	return (
-		<div className="min-w-content max-w-5xl mx-auto">
-			{/* <Sidebar/> */}
+        <SiteWrapper>
 			<Header/>
             <header className="h-14 px-4 flex flex-wrap justify-center items-center border-b-[1px]">
 				<h1 className="font-medium text-1xl">Add Transaction</h1>
@@ -42,7 +42,7 @@ export default function Categories() {
                 <label htmlFor="date">Date</label>
                 <input type="date" value={Date.now()} defaultValue={Date.now()}/>
             </section>
-		</div>
+        </SiteWrapper>
 	)
 }
 

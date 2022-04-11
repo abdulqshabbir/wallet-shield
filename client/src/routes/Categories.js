@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Sidebar from "../components/Sidebar"
 import Header from "../components/Header"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleMinus, faCirclePlus, faFolderPlus, faGripHorizontal } from "@fortawesome/free-solid-svg-icons"
@@ -7,13 +6,12 @@ import { useCategories } from "../contexts/Categories"
 import { useExpenses } from "../contexts/Expenses"
 import createCategory from '../services/createCategory'
 import createExpense from '../services/createExpense'
+import SiteWrapper from "../components/SiteWrapper"
 
 export default function Categories() {
 	const [renderAddCategory, setRenderAddCategory] = useState(false)
-
 	return (
-		<div className="min-w-content max-w-5xl mx-auto">
-			{/* <Sidebar/> */}
+		<SiteWrapper>
 			<Header/>
 			<main>
 				<div onClick={() => setRenderAddCategory(true)} className="h-20 flex flex-wrap justify-center items-center cursor-pointer">
@@ -25,7 +23,7 @@ export default function Categories() {
 				<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
 				<RenderCategories/>
 			</main>
-		</div>
+		</SiteWrapper>
 	)
 }
 

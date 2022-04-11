@@ -15,6 +15,7 @@ module.exports = {
       yellow: colors.yellow,
       red: colors.red,
       green: colors.green,
+      blue: colors.blue,
       primaryRed: "rgb(188, 81, 45)",
       buttonBlue: "rgb(89, 147, 210)",
       primaryBlue: 'rgb(46, 152, 212)',

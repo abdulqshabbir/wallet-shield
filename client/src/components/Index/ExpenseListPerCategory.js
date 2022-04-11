@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons"
-import Expense from "../Expense"
+import Expense from "./Expense"
 
 export default function ExpenseListPerCategory({ categoryName, expenses, categoryId }) {
 	const [ showExpenses, setShowExpenses ] = useState(true)
