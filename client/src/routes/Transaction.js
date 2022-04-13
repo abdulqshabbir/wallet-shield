@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import Header from "../components/Header"
 import SiteWrapper from "../components/SiteWrapper"
+import { useCategories } from "../contexts/Categories"
 
 export default function Categories() {
+    const [ categories, setCategories] = useCategories()
     const [ isLeft, setIsLeft ] = useState(false)
     const [ isRed, setIsRed ] = useState(true)
     const [ transactionValue, setTransactionValue ] = useState("")
+    const [ transactionDate, setTransactionDate ] = useState()
 
     function handleClick() {
         setIsLeft(!isLeft)
@@ -36,11 +39,10 @@ export default function Categories() {
             <section className="grid grid-cols-2">
                 <label htmlFor="category">Category</label>
                 <select name="category" id="category">
-                    <option value="movies">Movies</option>
-                    <option value="music">Music</option>
+                    {categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
                 </select>
                 <label htmlFor="date">Date</label>
-                <input type="date" value={Date.now()} defaultValue={Date.now()}/>
+                <input type="date" value={transactionDate} onChange={e => setTransactionDate(e.target.value)}/>
             </section>
         </SiteWrapper>
 	)
