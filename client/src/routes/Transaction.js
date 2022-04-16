@@ -10,7 +10,7 @@ export default function AddTransaction() {
     const [ isLeft, setIsLeft ] = useState(false)
     const [ isRed, setIsRed ] = useState(true)
     const [ transactionValue, setTransactionValue ] = useState("")
-    const [ transactionDate, setTransactionDate ] = useState()
+    const [ transactionDate, setTransactionDate ] = useState(getTodaysDate())
     const [ memo, setMemo ] = useState("")
 
     function handleClick() {
@@ -43,8 +43,11 @@ export default function AddTransaction() {
                 <label htmlFor="category">Category</label>
                 <div className="categories-dropdown-container flex items-center">
                     <div className="select">
-                        <select name="category" id="category">
-                            {categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+                        <select name="category" id="category" className="focus:outline-none">
+                            {categories.map(c =>
+                                <option key={c.id} value={c.name}>
+                                    {c.name}
+                                </option>)}
                         </select>
                     </div>
                     <FontAwesomeIcon icon={faArrowDown} />
@@ -54,7 +57,7 @@ export default function AddTransaction() {
                 <label htmlFor="repeat">Repeat</label>
                 <div className="categories-dropdown-container flex items-center">
                     <div className="select">
-                        <select>
+                        <select className="focus:outline-none">
                             <option value="Never">Never</option>
                             <option value="Weekly">Weekly</option>
                             <option value="Monthly">Montly</option>
@@ -86,13 +89,8 @@ export default function AddTransaction() {
 	)
 }
 
-function getFormattedDate() {
-    let dateObj = new Date()
-    let year = dateObj.getFullYear()
-    let monthIdx = dateObj.getMonth()
-    let date = dateObj.getDate()
+function getTodaysDate() {
+    let today = new Date()
 
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septemper", "October", "November", "December"]
-
-    return `${months[monthIdx]} ${date}, ${year}`
+    return `${today.toISOString().substring(0, 10)}`
 }

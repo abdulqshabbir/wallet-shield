@@ -1,10 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import db from './config/db.config.js'
-import Expense from './models/Expense.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import Category from './models/Category.js'
+import Expense from './models/Expense.js'
+import { Transaction } from "./models/Transaction.js"
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -95,6 +96,44 @@ app.post("/api/expenses", (req, res) => {
 		})
 	}
 
+})
+
+app.get("/api/transactions", (req, res) => {
+	Transaction.findAll()
+		.then(expenses => {
+			res.status(200).send(expenses)
+		})
+		.catch(e => {
+			res.status(400).send({error: "Internal server error", message: e.message})
+		})
+})
+
+app.post("/api/transactions", async(req, res) => {
+	const { amount, isOutflow, expenseId, repeat, memo } = req.body
+
+	if (isNaN(amount)) {
+		res.status(400).send({ error: "Invalid data sent" })
+	} else {
+		try {
+			const newTransaction = await Transaction.create({
+				amount,
+				isOutflow,
+				expenseId,
+				repeat,
+				memo: memo ? memo : null
+			})
+
+			const expense = await Expense.findByPk(expenseId)
+			expense.remaining = 
+				isOutflow
+				? expense.remaining - amount
+				: expense.remaining + amount
+			await expense.save()
+			res.status(201).send(newTransaction)
+		} catch(e) {
+			res.status(400).send({ error: "Internal server error", message: e.message })
+		}
+	}
 })
 
 app.listen(PORT, () => {
