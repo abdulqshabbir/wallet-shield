@@ -8,7 +8,7 @@ function Expense({ expenseName, expenseAmount, expenseMax }) {
 					<h4 className="font-light mb-1">{expenseName}</h4>
 					<ProgressBar name={expenseName} amount={expenseAmount} max={expenseMax} />
 				</div>
-				<span className="font-light text-gray-700">{expenseMax} CAD</span>
+				<span className="font-light text-gray-700">{expenseAmount} CAD</span>
 			</div>
 		</React.Fragment>
 	)

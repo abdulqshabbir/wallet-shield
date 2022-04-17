@@ -29,6 +29,10 @@ export const Transaction = db.define("transaction", {
     memo: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    date: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 })
 

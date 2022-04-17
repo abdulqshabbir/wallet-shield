@@ -109,7 +109,9 @@ app.get("/api/transactions", (req, res) => {
 })
 
 app.post("/api/transactions", async(req, res) => {
-	const { amount, isOutflow, expenseId, repeat, memo } = req.body
+	let { amount, isOutflow, expenseId, repeat, memo, date } = req.body
+	amount = parseFloat(amount)
+	expenseId = parseFloat(expenseId)
 
 	if (isNaN(amount)) {
 		res.status(400).send({ error: "Invalid data sent" })
@@ -120,7 +122,8 @@ app.post("/api/transactions", async(req, res) => {
 				isOutflow,
 				expenseId,
 				repeat,
-				memo: memo ? memo : null
+				memo: memo ? memo : null,
+				date
 			})
 
 			const expense = await Expense.findByPk(expenseId)
