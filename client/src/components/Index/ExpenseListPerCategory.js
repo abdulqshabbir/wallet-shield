@@ -18,9 +18,10 @@ export default function ExpenseListPerCategory({ categoryName, expenses, categor
 		Expenses = expenses.map(e =>
 			<Expense
 				key = {e.id}
-				expenseName = {e.name}
-				expenseAmount = {e.remaining}
-				expenseMax={e.max}
+				name = {e.name}
+				remaining = {e.remaining}
+				max={e.max}
+				id={e.id}
 			/>)
 	} else {
 		Expenses = null
