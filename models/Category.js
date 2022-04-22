@@ -1,5 +1,6 @@
 import { Sequelize} from 'sequelize'
 import db from '../config/db.config.js'
+import Expense from './Expense.js'
 
 const Category = db.define("category", {
     id: {
@@ -12,5 +13,7 @@ const Category = db.define("category", {
         allowNull: false
     }
 })
+
+Category.hasMany(Expense, { onDelete: "cascade"})
 
 export default Category 

@@ -1,6 +1,5 @@
 import { Sequelize} from 'sequelize'
 import db from '../config/db.config.js'
-import Category from './Category.js'
 
 const Expense = db.define("expense", {
     name: {
@@ -20,6 +19,5 @@ const Expense = db.define("expense", {
 })
 
 // Set up one-to-many relationship between expense and category
-Expense.belongsTo(Category)
 
 export default Expense

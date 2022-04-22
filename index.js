@@ -44,8 +44,19 @@ app.get("/api/expenses", (req, res) => {
 			res.status(200).json(expenses)
 		})
 		.catch(e => {
-			res.status(400).send({error: "Internal server error"})
 			console.log(e)
+			res.status(500).send({error: "Internal server error"})
+		})
+})
+
+app.get("/api/categories", (req, res) => {
+	Category.findAll()
+		.then(categories => {
+			res.status(200).send(categories)
+		})
+		.catch(e => {
+			console.log(e)
+			res.status(500).send({error: "Internal server error"})
 		})
 })
 
@@ -56,20 +67,25 @@ app.post("/api/categories", (req, res) => {
 	}).then (category => {
 		res.status(200).send(category)
 	}).catch(e => {
-		res.status(400).send({error: "Internal server error"})
+		res.status(500).send({error: "Internal server error"})
 		console.log(e)
 	})
 })
 
-app.get("/api/categories", (req, res) => {
-	Category.findAll()
-		.then(categories => {
-			res.status(200).send(categories)
-		})
-		.catch(e => {
-			console.log(e)
-			res.status(400).send({error: "Internal server error"})
-		})
+app.delete("/api/categories/:id", async (req, res) => {
+	const id = req.params.id
+
+	try {
+		let category = await Category.findByPk(id)
+		if (!category) {
+			return res.status(400).send({error: "Cannot delete a category that is not in the DB."})	
+		} else {
+			await category.destroy()
+			return res.status(200).send("Category successfully deleted.")
+		}
+	} catch(e) {
+		return res.status(500).send({error: "Internal server error."})
+	}
 })
 
 app.post("/api/expenses", (req, res) => {
