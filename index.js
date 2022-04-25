@@ -18,9 +18,9 @@ try {
 }
 
 // This runs the DROP TABLE IF EXISTS query
-(async () => {
-	await db.sync({ force: true })
-})()
+// (async () => {
+// 	await db.sync({ force: true })
+// })()
 
 // allow all cross origin requests
 app.use(cors())
