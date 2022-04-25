@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Header from "../components/Header"
+import Footer from "../components/Footer"
 import SiteWrapper from "../components/SiteWrapper"
 import { useExpenses } from "../contexts/Expenses"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -117,6 +118,7 @@ export default function AddTransaction() {
                     Save Transaction
                 </button>
             </div>
+            <Footer/>
         </SiteWrapper>
 	)
 }

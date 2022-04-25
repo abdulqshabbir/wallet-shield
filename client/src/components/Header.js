@@ -16,12 +16,11 @@ function Header() {
 							size="sm"
 						/>
 					</Link>
-					<h1 className="col-span-3 lg:col-span-1 cursor-pointer">
+					<h1 className="col-span-3 lg:col-span-1">
 						<span className="font-medium">April&nbsp;2022</span>
 						<FontAwesomeIcon
 							className="pl-2"
 							icon={faCircleChevronDown}
-							color={colors.primaryBlue}
 							size="sm"
 						/>
 					</h1>

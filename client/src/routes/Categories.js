@@ -4,6 +4,7 @@ import { useCategories } from "../contexts/Categories"
 import SiteWrapper from "../components/SiteWrapper"
 import AddCategoryButton from "../components/Categories/AddCategoryButton"
 import AddCategoryField from "../components/Categories/AddCategoryField"
+import Footer from "../components/Footer"
 import Category from "../components/Categories/Category"
 
 export default function Categories() {
@@ -14,6 +15,7 @@ export default function Categories() {
 			<AddCategoryButton setRenderAddCategory={setRenderAddCategory} />
 			<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
 			<RenderCategories/>
+			<Footer/>
 		</SiteWrapper>
 	)
 }
