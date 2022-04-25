@@ -7,6 +7,7 @@ import Transaction from "./routes/Transaction"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import CategoriesProvider from "./contexts/Categories"
 import ExpensesProvider from "./contexts/Expenses"
+import Login from "./routes/Login"
 
 ReactDOM.render(
   // browser router connects our react app to the browser URL
@@ -18,6 +19,7 @@ ReactDOM.render(
               <Route path="/" element={ <IndexPage /> } />
               <Route path="/categories" element={ <Categories /> } />
               <Route path="/transaction" element={ <Transaction /> } />
+              <Route path="/login" element={ <Login /> } />
           </Routes>
         </ExpensesProvider>
       </CategoriesProvider>
