@@ -10,7 +10,7 @@ export default function Login() {
             <div className="max-w-[1000px] mx-auto">
                 <main className="min-h-[700px] flex flex-col flex-wrap justify-center items-center md:flex-row">
                     <div className="order-1 w-full min-h-[450px] flex items-center flex-col justify-center md:p-16 md:w-1/2 md:-order-1">
-                        <img src="login-image.png" width="400px"/>
+                        <img alt="" src="login-image.png" width="400px"/>
                         <p className="mt-8 text-[1rem] hidden text-primaryGray-300 md:block">Wallet Shield is a budgeting app that helps you become aware of what you spend, get out of debt and take control of your financial freedom.</p>
                     </div>
                     <div className="w-full min-h-[350px] p-4 flex flex-col justify-evenly md:px-12 md:w-1/2">
