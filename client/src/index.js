@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import CategoriesProvider from "./contexts/Categories"
 import ExpensesProvider from "./contexts/Expenses"
 import Login from "./routes/Login"
+import Signup from "./routes/Signup"
 
 ReactDOM.render(
   // browser router connects our react app to the browser URL
@@ -20,6 +21,7 @@ ReactDOM.render(
               <Route path="/categories" element={ <Categories /> } />
               <Route path="/transaction" element={ <Transaction /> } />
               <Route path="/login" element={ <Login /> } />
+              <Route path="/signup" element={ <Signup /> } />
           </Routes>
         </ExpensesProvider>
       </CategoriesProvider>
