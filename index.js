@@ -1,11 +1,16 @@
+// general modules
 import express from 'express'
 import cors from 'cors'
 import db from './config/db.config.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import bcrypt from "bcryptjs"
+
+// models
 import Category from './models/Category.js'
 import Expense from './models/Expense.js'
 import { Transaction } from "./models/Transaction.js"
+import User from './models/User.js'
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -18,9 +23,9 @@ try {
 }
 
 // This runs the DROP TABLE IF EXISTS query
-// (async () => {
-// 	await db.sync({ force: true })
-// })()
+(async () => {
+	await db.sync({ force: true })
+})()
 
 // allow all cross origin requests
 app.use(cors())
@@ -153,6 +158,40 @@ app.post("/api/transactions", async(req, res) => {
 			res.status(400).send({ error: "Internal server error", message: e.message })
 		}
 	}
+})
+
+app.post("/api/signup", async(req, res) => {
+	let { email, password, confirmPassword } = req.body
+	
+	if (!email || !password || !confirmPassword) {
+		return res.status(400).json({ error: "Please fill all required fields."})
+	}
+
+	if (password !== confirmPassword) {
+		return res.status(400).json({ error: "Passwords must match." })
+	}
+
+	if (password.length < 8) {
+		return res.status(400).json({ error: "Password must be at least 8 characters."})
+	}
+
+	try {
+		let user = await User.findOne({ where: { email: email} })
+		if (user) {
+			return res.status(400).json({ error: "User with email already exists."})
+		}
+
+		let hashedPassword = await bcrypt.hash(password, 10)
+		user = await User.create({
+			email,
+			hashedPassword
+		})
+		return res.status(200).json(user)
+	} catch(e) {
+		return res.status(500).json({ error: "Internal server error."})
+	}
+
+
 })
 
 app.listen(PORT, () => {
