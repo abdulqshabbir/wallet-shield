@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === "production") {
 
 }
 
+//=============  AUTH ROUTES =============//
 function authenticateToken (req, res, next) {
 	const authHeader = req.headers['authorization']
 	const token = authHeader && authHeader.split(" ")[1]
@@ -57,7 +58,92 @@ function authenticateToken (req, res, next) {
 	}
 }
 
-app.get("/api/expenses", (req, res) => {
+let refreshTokens = []
+
+app.post("/api/token", (req, res) => {
+	/*
+		user sends refreshToken in request body
+		server sends back new access token if refreshToken is valid
+		server sends back 403 if invalid
+	 */
+	const refreshToken= req.body.token
+	if (!refreshToken) return res.status(401).json({ error: "No refresh token provided." })
+	if(!refreshTokens.includes(refreshToken)) return res.status(403).json({ error: "Invalid refresh token."})
+	try {
+		const user = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN)
+		const accessToken = jwt.sign({ email: user.email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "15s" })
+		return res.status(200).json({ accessToken })
+	} catch(e) {
+		return res.status(403).json({ error: "Unauthorized."})
+	}
+})
+
+app.post("/api/signup", async(req, res) => {
+	let { email, password, confirmPassword } = req.body
+	
+	if (!email || !password || !confirmPassword) {
+		return res.status(400).json({ error: "Please fill all required fields."})
+	}
+
+	if (password !== confirmPassword) {
+		return res.status(400).json({ error: "Passwords must match." })
+	}
+
+	if (password.length < 8) {
+		return res.status(400).json({ error: "Password must be at least 8 characters."})
+	}
+
+	try {
+		let user = await User.findOne({ where: { email: email} })
+		if (user) {
+			return res.status(400).json({ error: "User with email already exists."})
+		}
+
+		let hashedPassword = await bcrypt.hash(password, 10)
+		user = await User.create({
+			email,
+			hashedPassword
+		})
+		return res.status(200).json({ message: "User successfully created. Try logging in!"})
+	} catch(e) {
+		return res.status(500).json({ error: "Internal server error."})
+	}
+})
+
+app.post("/api/login", async (req, res) => {
+	const { email, password } = req.body
+
+	if (!email || !password) {
+		return res.status(400).json({ error: "Please fill all required fields."})
+	}
+	try {
+		let user = await User.findOne({ where: { email: email }})
+		if (!user) {
+			return res.status(400).json({ error: "User with this email does not exist."})
+		}
+
+		let isPasswordMatch = await bcrypt.compare(password, user.hashedPassword)
+		if (!isPasswordMatch) {
+			return res.status(400).json({ error: "Incorrect password for this email."})
+		} else {
+			// send jwt token to authorize user
+			const accessToken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "15s"})
+			const refreshToken = jwt.sign({ email }, process.env.JWT_REFRESH_TOKEN)
+			// TODO remove line and add refresh tokens to database
+			refreshTokens.push(refreshToken)
+			return res.status(200).json({ accessToken, refreshToken })
+		}
+	} catch(e) {
+		return res.status(500).json({ error: "Internal server error."})
+	}
+})
+
+app.delete("/api/logout", (req, res) => {
+	refreshTokens = refreshTokens.filter(t => t !== req.body.token)
+	return res.sendStatus(204)
+})
+
+app.get("/api/expenses", authenticateToken, (req, res) => {
 	Expense.findAll()
 		.then(expenses => {
 			res.status(200).json(expenses)
@@ -174,62 +260,6 @@ app.post("/api/transactions", async(req, res) => {
 	}
 })
 
-app.post("/api/signup", async(req, res) => {
-	let { email, password, confirmPassword } = req.body
-	
-	if (!email || !password || !confirmPassword) {
-		return res.status(400).json({ error: "Please fill all required fields."})
-	}
-
-	if (password !== confirmPassword) {
-		return res.status(400).json({ error: "Passwords must match." })
-	}
-
-	if (password.length < 8) {
-		return res.status(400).json({ error: "Password must be at least 8 characters."})
-	}
-
-	try {
-		let user = await User.findOne({ where: { email: email} })
-		if (user) {
-			return res.status(400).json({ error: "User with email already exists."})
-		}
-
-		let hashedPassword = await bcrypt.hash(password, 10)
-		user = await User.create({
-			email,
-			hashedPassword
-		})
-		return res.status(200).json({ message: "User successfully created. Try logging in!"})
-	} catch(e) {
-		return res.status(500).json({ error: "Internal server error."})
-	}
-})
-
-app.post("/api/login", async (req, res) => {
-	const { email, password } = req.body
-
-	if (!email || !password) {
-		return res.status(400).json({ error: "Please fill all required fields."})
-	}
-	try {
-		let user = await User.findOne({ where: { email: email }})
-		if (!user) {
-			return res.status(400).json({ error: "User with this email does not exist."})
-		}
-
-		let isPasswordMatch = await bcrypt.compare(password, user.hashedPassword)
-		if (!isPasswordMatch) {
-			return res.status(400).json({ error: "Incorrect password for this email."})
-		} else {
-			// send jwt token to authorize user
-			const token = jwt.sign({ name: email }, process.env.JWT_ACCESS_TOKEN)
-			return res.json({ accessToken: token })
-		}
-	} catch(e) {
-		return res.status(500).json({ error: "Internal server error."})
-	}
-})
 
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}`)
