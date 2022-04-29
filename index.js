@@ -5,6 +5,7 @@ import db from './config/db.config.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
 
 // models
 import Category from './models/Category.js'
@@ -43,6 +44,19 @@ if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "client/build")))
 
 }
+
+function authenticateToken (req, res, next) {
+	const authHeader = req.headers['authorization']
+	const token = authHeader && authHeader.split(" ")[1]
+	if (!token) return res.status(401).json({ error: "No authorization token provided."})
+	try {
+		req.user = jwt.verify(token, process.env.JWT_ACCESS_TOKEN)
+		next()
+	} catch(e) {
+		return res.status(403).send("Token is not valid.")
+	}
+}
+
 app.get("/api/expenses", (req, res) => {
 	Expense.findAll()
 		.then(expenses => {
@@ -186,7 +200,7 @@ app.post("/api/signup", async(req, res) => {
 			email,
 			hashedPassword
 		})
-		return res.status(200).json(user)
+		return res.status(200).json({ message: "User successfully created. Try logging in!"})
 	} catch(e) {
 		return res.status(500).json({ error: "Internal server error."})
 	}
@@ -208,7 +222,9 @@ app.post("/api/login", async (req, res) => {
 		if (!isPasswordMatch) {
 			return res.status(400).json({ error: "Incorrect password for this email."})
 		} else {
-			return res.status(200).json(user)
+			// send jwt token to authorize user
+			const token = jwt.sign({ name: email }, process.env.JWT_ACCESS_TOKEN)
+			return res.json({ accessToken: token })
 		}
 	} catch(e) {
 		return res.status(500).json({ error: "Internal server error."})
