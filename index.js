@@ -12,6 +12,7 @@ import Category from './models/Category.js'
 import Expense from './models/Expense.js'
 import { Transaction } from "./models/Transaction.js"
 import User from './models/User.js'
+import RefreshToken from './models/RefreshToken.js'
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -58,18 +59,15 @@ function authenticateToken (req, res, next) {
 	}
 }
 
-let refreshTokens = []
-
-app.post("/api/token", (req, res) => {
-	/*
-		user sends refreshToken in request body
-		server sends back new access token if refreshToken is valid
-		server sends back 403 if invalid
-	 */
-	const refreshToken= req.body.token
-	if (!refreshToken) return res.status(401).json({ error: "No refresh token provided." })
-	if(!refreshTokens.includes(refreshToken)) return res.status(403).json({ error: "Invalid refresh token."})
+app.post("/api/token", async (req, res) => {
+	const token= req.body.token
+	if (!token) return res.status(401).json({ error: "No refresh token provided." })
 	try {
+		let refreshTokenModel  = await RefreshToken.findOne({ where: { value: token }})
+		let refreshToken = refreshTokenModel.value
+
+		if(!refreshToken) return res.status(403).json({ error: "Invalid refresh token."})
+
 		const user = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN)
 		const accessToken = jwt.sign({ email: user.email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "15s" })
 		return res.status(200).json({ accessToken })
@@ -130,17 +128,29 @@ app.post("/api/login", async (req, res) => {
 			const accessToken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "15s"})
 			const refreshToken = jwt.sign({ email }, process.env.JWT_REFRESH_TOKEN)
 			// TODO remove line and add refresh tokens to database
-			refreshTokens.push(refreshToken)
-			return res.status(200).json({ accessToken, refreshToken })
+			try {
+				await RefreshToken.create({ value: refreshToken })
+				return res.status(200).json({ accessToken, refreshToken })
+			} catch(e) {
+				return res.status(500).json({ error: "Internal server error."})
+			}
 		}
 	} catch(e) {
 		return res.status(500).json({ error: "Internal server error."})
 	}
 })
 
-app.delete("/api/logout", (req, res) => {
-	refreshTokens = refreshTokens.filter(t => t !== req.body.token)
-	return res.sendStatus(204)
+app.delete("/api/logout", async (req, res) => {
+	try {
+		let token = await RefreshToken.findOne({where: { value: req.body.token }})
+		if (!token) {
+			res.status(400).json({ error: "Could not find refresh token in DB."})
+		}
+		await token.destroy()
+		return res.sendStatus(204)
+	} catch(e) {
+		return res.status(500).json({ error: "Internal Server Error."})
+	}
 })
 
 app.get("/api/expenses", authenticateToken, (req, res) => {
