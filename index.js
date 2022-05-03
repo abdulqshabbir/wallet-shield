@@ -153,7 +153,7 @@ app.delete("/api/logout", async (req, res) => {
 	}
 })
 
-app.get("/api/expenses", authenticateToken, (req, res) => {
+app.get("/api/expenses", (req, res) => {
 	Expense.findAll()
 		.then(expenses => {
 			res.status(200).json(expenses)

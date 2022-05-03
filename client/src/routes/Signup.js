@@ -1,7 +1,30 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import signupUser from "../services/signupUser"
 
-export default function Login() {
+export default function Signup() {
+    const [ email, setEmail ] = useState("")
+    const [ password , setPassword ] = useState("")
+    const [ confirmPassword, setConfirmPassword ] = useState("")
+    const [ error, setError ] = useState("")
+    const [ success, setSuccess ] = useState("")
+
+    async function handleSignup() {
+        const res = await signupUser(email, password, confirmPassword)
+        if (res.status > 200) {
+            const { error } = await res.json()
+            setError(error)
+        } else {
+            const { message } = await res.json()
+            setSuccess(message)
+        }
+    }
+
+    function clearMessages () {
+        setSuccess("")
+        setError("")
+    }
+
 	return (
         <React.Fragment>
             <header className="h-14 pl-4 font-semibold flex justify-center items-center border-b-2 md:justify-start">
@@ -17,11 +40,17 @@ export default function Login() {
                         <h1 className="mb-4 text-center text-4xl font-bold">Signup</h1>
                         <h3 className="mb-4 text-center text-[0.9rem] font-light text-primaryGray-300">Already have a Wallet Shield account?<Link to="/login" className="text-primaryBlue hover:underline"> Log in.</Link></h3>
                         <form>
-                            <Input type={"email"} placeholder={"Email address"}/>
-                            <Input type={"password"} placeholder={"Password"} />
-                            <Input type={"password"} placeholder={"Confirm Password"} />
+                            <Input type={"email"} placeholder={"Email address"} onChangeHandler={e => setEmail(e.target.value)} onFocusHandler={clearMessages} />
+                            <Input type={"password"} placeholder={"Password"} onChangeHandler={e => setPassword(e.target.value)} onFocusHandler={clearMessages} />
+                            <Input type={"password"} placeholder={"Confirm Password"} onChangeHandler={e => setConfirmPassword(e.target.value)} onFocusHandler={clearMessages} />
                         </form>
-                        <button className="h-12 text-white font-light bg-primaryBlue rounded-md hover:bg-blue-400">Log In</button>
+                        <ErrorCard message={error} successMessage={success} setSuccessMessage={setSuccess} />
+                        <SuccessCard message={success} />
+                        <button
+                            className="h-12 text-white font-light bg-primaryBlue rounded-md hover:bg-blue-400"
+                            onClick={handleSignup}>
+                                Sign up
+                        </button>
                     </div>
                 </main>
             </div>
@@ -29,6 +58,30 @@ export default function Login() {
 	)
 }
 
-function Input({ type, placeholder }) {
-    return <input className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light" placeholder={placeholder} type={type} />
+function ErrorCard({ message, successMessage, setSuccessMessage }) {
+    if (message === "") return null
+
+    if (successMessage !== "") {
+        setSuccessMessage("")
+    }
+
+    return (
+        <div className="h-10 mb-4 rounded-md text-[1rem] flex justify-center items-center font-light bg-red-200">
+            <p>{ message }</p>
+        </div>
+    )
+}
+
+function SuccessCard({ message, successMessage, setSuccessMessage }) {
+    if (message === "") return null
+
+    return (
+        <div className="h-10 mb-4 rounded-md text-[1rem] flex justify-center items-center font-light bg-green-100">
+            <p>{ message }</p>
+        </div>
+    )
+}
+
+function Input({ type, placeholder, onChangeHandler, onFocusHandler }) {
+    return <input onChange={onChangeHandler} onFocus={onFocusHandler} className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light" placeholder={placeholder} type={type} />
 }
