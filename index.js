@@ -144,7 +144,7 @@ app.delete("/api/logout", async (req, res) => {
 	try {
 		let token = await RefreshToken.findOne({where: { value: req.body.token }})
 		if (!token) {
-			res.status(400).json({ error: "Could not find refresh token in DB."})
+			return res.status(204)
 		}
 		await token.destroy()
 		return res.sendStatus(204)

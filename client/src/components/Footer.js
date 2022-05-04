@@ -5,12 +5,16 @@ import {Link} from "react-router-dom"
 import colors from "../constants/colors"
 import { clearTokensFromLocalStorage } from "../services/auth"
 import { useUser } from "../contexts/User"
+import logoutUser from "../services/logoutUser"
 
 function Footer() {
 	const [ use, setUser ] = useUser()
-	function handleLogout() {
-		clearTokensFromLocalStorage()
-		setUser(null)
+	async function handleLogout() {
+		const res = await logoutUser()
+		if (res.status === 204) {
+			clearTokensFromLocalStorage()
+			setUser(null)
+		}
 	}
 	return (
 		<React.Fragment>
