@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import signupUser from "../services/signupUser"
+import ErrorCard from "../components/Authentication/ErrorCard"
 
 export default function Signup() {
     const [ email, setEmail ] = useState("")
@@ -40,9 +41,9 @@ export default function Signup() {
                         <h1 className="mb-4 text-center text-4xl font-bold">Signup</h1>
                         <h3 className="mb-4 text-center text-[0.9rem] font-light text-primaryGray-300">Already have a Wallet Shield account?<Link to="/login" className="text-primaryBlue hover:underline"> Log in.</Link></h3>
                         <form>
-                            <Input type={"email"} placeholder={"Email address"} onChangeHandler={e => setEmail(e.target.value)} onFocusHandler={clearMessages} />
-                            <Input type={"password"} placeholder={"Password"} onChangeHandler={e => setPassword(e.target.value)} onFocusHandler={clearMessages} />
-                            <Input type={"password"} placeholder={"Confirm Password"} onChangeHandler={e => setConfirmPassword(e.target.value)} onFocusHandler={clearMessages} />
+                            <Input type={"email"} placeholder={"Email address"} value={email} onChangeHandler={e => setEmail(e.target.value)} onFocusHandler={clearMessages} />
+                            <Input type={"password"} placeholder={"Password"} value={password} onChangeHandler={e => setPassword(e.target.value)} onFocusHandler={clearMessages} />
+                            <Input type={"password"} placeholder={"Confirm Password"} value={confirmPassword} onChangeHandler={e => setConfirmPassword(e.target.value)} onFocusHandler={clearMessages} />
                         </form>
                         <ErrorCard message={error} successMessage={success} setSuccessMessage={setSuccess} />
                         <SuccessCard message={success} />
@@ -58,21 +59,7 @@ export default function Signup() {
 	)
 }
 
-function ErrorCard({ message, successMessage, setSuccessMessage }) {
-    if (message === "") return null
-
-    if (successMessage !== "") {
-        setSuccessMessage("")
-    }
-
-    return (
-        <div className="h-10 mb-4 rounded-md text-[1rem] flex justify-center items-center font-light bg-red-200">
-            <p>{ message }</p>
-        </div>
-    )
-}
-
-function SuccessCard({ message, successMessage, setSuccessMessage }) {
+function SuccessCard({ message }) {
     if (message === "") return null
 
     return (
@@ -82,6 +69,6 @@ function SuccessCard({ message, successMessage, setSuccessMessage }) {
     )
 }
 
-function Input({ type, placeholder, onChangeHandler, onFocusHandler }) {
-    return <input onChange={onChangeHandler} onFocus={onFocusHandler} className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light" placeholder={placeholder} type={type} />
+function Input({ type, placeholder, value, onChangeHandler, onFocusHandler }) {
+    return <input onChange={onChangeHandler} value={value} onFocus={onFocusHandler} className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light" placeholder={placeholder} type={type} />
 }

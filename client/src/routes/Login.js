@@ -1,7 +1,26 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import loginUser from "../services/loginUser"
+import ErrorCard from "../components/Authentication/ErrorCard"
 
 export default function Login() {
+    const [ email, setEmail ] = useState("")
+    const [ password, setPassword ] = useState("")
+    const [ error, setError ] = useState("")
+    const navigate = useNavigate()
+
+    async function handleUserLogin() {
+        let res = await loginUser(email, password)
+
+        if (res.status > 200) {
+            let { error } =  await res.json()
+            setError(error)
+        } else {
+            let { accessToken, refreshToken } = await res.json()
+            navigate('/')
+        }
+    }
+
 	return (
         <React.Fragment>
             <header className="h-14 pl-4 font-semibold flex justify-center items-center border-b-2 md:justify-start">
@@ -17,10 +36,11 @@ export default function Login() {
                         <h1 className="text-center text-4xl font-bold">Log In</h1>
                         <h3 className="text-center text-[0.9rem] font-light text-primaryGray-300">New to Wallet Shield? <Link className="text-primaryBlue hover:underline" to="/signup">Sign up.</Link></h3>
                         <form>
-                            <Input type={"email"} placeholder={"Email address"}/>
-                            <Input type={"password"} placeholder={"Password"} />
+                            <Input type={"email"} placeholder={"Email address"} value={email} onChangeHandler={e => setEmail(e.target.value)} onFocusHandler={e => setError("")} />
+                            <Input type={"password"} placeholder={"Password"} value={password} onChangeHandler={e => setPassword(e.target.value)} onFocusHandler={e => setError("")} />
                         </form>
-                        <button className="h-12 text-white font-light bg-primaryBlue rounded-md hover:bg-blue-400">Log In</button>
+                        <ErrorCard message={error} /> 
+                        <button onClick={handleUserLogin} className="h-12 text-white font-light bg-primaryBlue rounded-md hover:bg-blue-400">Log In</button>
                     </div>
                 </main>
             </div>
@@ -28,6 +48,15 @@ export default function Login() {
 	)
 }
 
-function Input({ type, placeholder }) {
-    return <input className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light" placeholder={placeholder} type={type} />
+function Input({ type, placeholder, value, onChangeHandler, onFocusHandler }) {
+    return (
+        <input
+            className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light"
+            value={value}
+            onChange={onChangeHandler}
+            onFocus={onFocusHandler}
+            placeholder={placeholder}
+            type={type} 
+        />
+    )
 }
