@@ -6,17 +6,20 @@ import AssignMoney from "../components/Index/AssignMoney"
 import TableHeader from "../components/Index/TableHeader"
 import CategoriesAndExpensesList from "../components/Index/CategoriesAndExpensesList"
 import SiteWrapper from "../components/SiteWrapper"
+import Protected from "../components/Protected"
 
 function App() {
 	return (
-		<SiteWrapper>
-			<Header/>
-			<AssignMoney />
-			<TableHeader />
-			<CategoriesAndExpensesList />
-			<Footer/>
-		</SiteWrapper>
+		<Protected>
+			<SiteWrapper>
+				<Header/>
+				<AssignMoney />
+				<TableHeader />
+				<CategoriesAndExpensesList />
+				<Footer/>
+			</SiteWrapper>
+		</Protected>
 	)
 }
-  
+
 export default App

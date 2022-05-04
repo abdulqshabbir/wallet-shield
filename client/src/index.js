@@ -9,11 +9,13 @@ import CategoriesProvider from "./contexts/Categories"
 import ExpensesProvider from "./contexts/Expenses"
 import Login from "./routes/Login"
 import Signup from "./routes/Signup"
+import UserProvider from "./contexts/User"
 
 ReactDOM.render(
   // browser router connects our react app to the browser URL
   <React.StrictMode>
     <BrowserRouter>
+    <UserProvider>
       <CategoriesProvider>
         <ExpensesProvider>
           <Routes>
@@ -25,6 +27,7 @@ ReactDOM.render(
           </Routes>
         </ExpensesProvider>
       </CategoriesProvider>
+    </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

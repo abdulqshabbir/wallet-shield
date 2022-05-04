@@ -1,31 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCirclePlus, faCircleChevronDown, faMoneyBill1Wave, faChartLine, faBuildingColumns } from "@fortawesome/free-solid-svg-icons"
+import { faCirclePlus, faDoorOpen } from "@fortawesome/free-solid-svg-icons"
 import React from "react"
 import {Link} from "react-router-dom"
-import colors from '../constants/colors'
+import colors from "../constants/colors"
+import { clearTokensFromLocalStorage } from "../services/auth"
+import { useUser } from "../contexts/User"
 
 function Footer() {
-	 return (
-		 <React.Fragment>
-			 <div className="w-full max-w-5xl mx-auto h-14 grid grid-cols-5 justify-content-center content-center justify-around px-12 fixed bottom-0 z-10 bg-white border-t-[1px]">
-					<a className="hover:scale-125 text-center" href="#a">
-						<FontAwesomeIcon className="" icon={faCircleChevronDown} color={colors.primaryGray} />
-					</a>
-					<a className="hover:scale-125 text-center" href="#a">
-						<FontAwesomeIcon className="" icon={faMoneyBill1Wave} color={colors.primaryGray} />
-					</a>
-					<Link to="/transaction" className='hover:scale-125 text-center'>
-						<FontAwesomeIcon className="" icon={faCirclePlus} color={colors.primaryBlue} />
-					</Link>
-					<a className="hover:scale-125 text-center" href="#a">
-						<FontAwesomeIcon className="" icon={faChartLine} color={colors.primaryGray} />
-					</a>
-					<a className="hover:scale-125 text-center" href="#a">
-						<FontAwesomeIcon className="" icon={faBuildingColumns} color={colors.primaryGray} />
-					</a>
-				</div>
-		 </React.Fragment>
-	 )
+	const [ use, setUser ] = useUser()
+	function handleLogout() {
+		clearTokensFromLocalStorage()
+		setUser(null)
+	}
+	return (
+		<React.Fragment>
+			<div className="w-full max-w-5xl mx-auto h-14 grid grid-cols-2 items-center px-12 fixed bottom-0 z-10 bg-white border-t-[1px]">
+				<Link to="/transaction" className='hover:scale-125 text-center'>
+					<FontAwesomeIcon icon={faCirclePlus} color={colors.primaryBlue} />
+				</Link>
+				<Link onClick={handleLogout} to="/login" className='hover:scale-125 text-center'>
+					<FontAwesomeIcon icon={faDoorOpen} color={colors.primaryBlue} />
+				</Link>
+			</div>
+		</React.Fragment>
+	)
 }
 
 export default Footer

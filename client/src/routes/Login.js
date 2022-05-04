@@ -2,12 +2,16 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import loginUser from "../services/loginUser"
 import ErrorCard from "../components/Authentication/ErrorCard"
+import { setTokensInLocalStorage } from "../services/auth"
+import jwt from "jwt-decode"
+import { useUser } from "../contexts/User"
 
 export default function Login() {
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ error, setError ] = useState("")
     const navigate = useNavigate()
+    const [ user, setUser ] = useUser()
 
     async function handleUserLogin() {
         let res = await loginUser(email, password)
@@ -17,6 +21,9 @@ export default function Login() {
             setError(error)
         } else {
             let { accessToken, refreshToken } = await res.json()
+            setTokensInLocalStorage(accessToken, refreshToken)
+            let userFromToken = jwt(refreshToken)
+            setUser({ email: userFromToken.email })
             navigate('/')
         }
     }

@@ -1,6 +1,12 @@
-export function setUserInLocalStorage(accessToken, refreshToken) {
+import jwt from "jwt-decode"
+
+export function setTokensInLocalStorage(accessToken, refreshToken) {
     localStorage.setItem("accessToken", accessToken)
     localStorage.setItem("refreshToken", refreshToken)
+}
+
+export function clearTokensFromLocalStorage() {
+    localStorage.clear()
 }
 
 export function getUserFromLocalStorage() {
@@ -8,5 +14,6 @@ export function getUserFromLocalStorage() {
 
     if (refreshToken === null) return null
 
-    return refresh
+    let user = jwt(refreshToken)
+    return { email: user.email }
 }
