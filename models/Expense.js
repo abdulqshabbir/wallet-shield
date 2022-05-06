@@ -18,6 +18,4 @@ const Expense = db.define("expense", {
     // id added by sequelize
 })
 
-// Set up one-to-many relationship between expense and category
-
 export default Expense

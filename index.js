@@ -47,12 +47,14 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //=============  AUTH ROUTES =============//
-function authenticateToken (req, res, next) {
+async function authenticateToken (req, res, next) {
 	const authHeader = req.headers['authorization']
 	const token = authHeader && authHeader.split(" ")[1]
 	if (!token) return res.status(401).json({ error: "No authorization token provided."})
 	try {
-		req.user = jwt.verify(token, process.env.JWT_ACCESS_TOKEN)
+		const userFromtoken = jwt.verify(token, process.env.JWT_ACCESS_TOKEN)
+		const user = await User.findOne({ where: { email: userFromtoken.email }})
+		req.user = user
 		next()
 	} catch(e) {
 		return res.status(403).send("Token is not valid.")
@@ -69,7 +71,7 @@ app.post("/api/token", async (req, res) => {
 		if(!refreshToken) return res.status(403).json({ error: "Invalid refresh token."})
 
 		const user = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN)
-		const accessToken = jwt.sign({ email: user.email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "15s" })
+		const accessToken = jwt.sign({ email: user.email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1d" })
 		return res.status(200).json({ accessToken })
 	} catch(e) {
 		return res.status(403).json({ error: "Unauthorized."})
@@ -125,7 +127,7 @@ app.post("/api/login", async (req, res) => {
 			return res.status(400).json({ error: "Incorrect password for this email."})
 		} else {
 			// send jwt token to authorize user
-			const accessToken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "15s"})
+			const accessToken = jwt.sign({ email }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1d"})
 			const refreshToken = jwt.sign({ email }, process.env.JWT_REFRESH_TOKEN)
 			// TODO remove line and add refresh tokens to database
 			try {
@@ -153,8 +155,9 @@ app.delete("/api/logout", async (req, res) => {
 	}
 })
 
-app.get("/api/expenses", (req, res) => {
-	Expense.findAll()
+app.get("/api/expenses", authenticateToken, (req, res) => {
+	const userId = req.user.id
+	Expense.findAll({ where : { userId } })
 		.then(expenses => {
 			res.status(200).json(expenses)
 		})
@@ -164,21 +167,25 @@ app.get("/api/expenses", (req, res) => {
 		})
 })
 
-app.get("/api/categories", (req, res) => {
-	Category.findAll()
-		.then(categories => {
-			res.status(200).send(categories)
-		})
-		.catch(e => {
-			console.log(e)
-			res.status(500).send({error: "Internal server error"})
-		})
+app.get("/api/categories", authenticateToken, (req, res) => {
+	const userId = req.user.id	
+	Category
+	.findAll({ where: { userId }})
+	.then(categories => {
+		res.status(200).send(categories)
+	})
+	.catch(e => {
+		console.log(e)
+		res.status(500).send({error: "Internal server error"})
+	})
 })
 
-app.post("/api/categories", (req, res) => {
+app.post("/api/categories", authenticateToken, (req, res) => {
 	const name = req.body.name
+	const user = req.user
 	Category.create({
-		name
+		name,
+		userId: user.id
 	}).then (category => {
 		res.status(200).send(category)
 	}).catch(e => {
@@ -203,11 +210,12 @@ app.delete("/api/categories/:id", async (req, res) => {
 	}
 })
 
-app.post("/api/expenses", (req, res) => {
+app.post("/api/expenses", authenticateToken, (req, res) => {
 	const name = req.body.name
 	const remaining = parseFloat(req.body.remaining)
 	const max = parseFloat(req.body.max)
 	const categoryId = req.body.categoryId
+	const userId = req.user.id
 
 	if ( isNaN(remaining) || isNaN(max) || max <= 0 || remaining <= 0) {
 		res.status(400).send({ error: 'Invalid data sent' })
@@ -216,7 +224,8 @@ app.post("/api/expenses", (req, res) => {
 			name,
 			remaining,
 			max,
-			categoryId
+			categoryId,
+			userId
 		})
 		.then(expense => {
 			res.status(200).send(expense)
