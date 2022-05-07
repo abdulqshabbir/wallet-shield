@@ -54,6 +54,9 @@ async function authenticateToken (req, res, next) {
 	try {
 		const userFromtoken = jwt.verify(token, process.env.JWT_ACCESS_TOKEN)
 		const user = await User.findOne({ where: { email: userFromtoken.email }})
+		if (!user) {
+			return res.status(403).json({ error: "User unauthorized."})
+		}
 		req.user = user
 		next()
 	} catch(e) {
@@ -61,7 +64,7 @@ async function authenticateToken (req, res, next) {
 	}
 }
 
-app.post("/api/token", async (req, res) => {
+app.post("/api/token", authenticateToken, async (req, res) => {
 	const token= req.body.token
 	if (!token) return res.status(401).json({ error: "No refresh token provided." })
 	try {
@@ -226,7 +229,6 @@ app.post("/api/categories", authenticateToken, (req, res) => {
 
 app.delete("/api/categories/:id", authenticateToken, async (req, res) => {
 	const id = req.params.id
-
 	try {
 		let category = await Category.findByPk(id)
 		if (!category) {

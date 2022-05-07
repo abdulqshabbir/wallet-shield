@@ -1,12 +1,12 @@
+import { getDefaultHeaders } from "./auth"
+
 export default async function logoutUser() {
     const opts = {
         method: "DELETE",
         body: JSON.stringify({
             token: localStorage.getItem("refreshToken")
         }),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: getDefaultHeaders()
     }
 
     try {

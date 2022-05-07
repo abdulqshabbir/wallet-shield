@@ -1,3 +1,5 @@
+import { getDefaultHeaders } from "./auth"
+
 export default async function createTransaction(amount, isOutflow, expenseId, repeat, memo, date) {
     const opts = {
         method: "POST",
@@ -9,9 +11,7 @@ export default async function createTransaction(amount, isOutflow, expenseId, re
             memo: memo ? memo : null,
             date
         }),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: getDefaultHeaders() 
     }
 
     try {
@@ -20,7 +20,7 @@ export default async function createTransaction(amount, isOutflow, expenseId, re
         let newTransaction = await res.json()
         return newTransaction
     } catch(e) {
-        throw new Error(e) 
+        throw new Error(e.message) 
     }
 }
 

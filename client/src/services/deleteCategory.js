@@ -1,6 +1,11 @@
+import { getBearerTokenFromLocalStorage } from "./auth"
+
 export default async function deleteCategory(id) {
     const opts = {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+            'Authorization': getBearerTokenFromLocalStorage()
+        }
     }
     try {
         let res = await fetch(`/api/categories/${id}`, opts)

@@ -1,5 +1,15 @@
+import { getBearerTokenFromLocalStorage } from "./auth"
+
 export default function getExpenses() {
-    return fetch("/api/expenses")
+    let token = getBearerTokenFromLocalStorage()
+    const opts = {
+        method: "GET",
+        headers: {
+            'Authorization': token
+        }
+    }
+
+    return fetch("/api/expenses", opts)
     .then(res => {
         if (res.status === 200) {
             return res.json()
@@ -7,5 +17,7 @@ export default function getExpenses() {
             return null
         }
     })
-    .catch(e => console.log(e))
+    .catch(e => {
+        console.log(e)
+    })
 }

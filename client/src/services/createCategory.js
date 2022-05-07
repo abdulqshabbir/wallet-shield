@@ -1,10 +1,10 @@
+import { getDefaultHeaders } from "../services/auth"
+
 export default async function createCategory(name) {
     const opts = {
         method: "POST",
         body: JSON.stringify({name: name}),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: getDefaultHeaders()
     }
 
     try {

@@ -1,12 +1,11 @@
 import { Navigate } from "react-router-dom"
-import { getUserFromLocalStorage } from "../services/auth"
+import { useUser } from "./../contexts/User"
 
 export default function Protected({ children }) {
-    const user = getUserFromLocalStorage()
-
-    if (user === null) {
+    const [ user, ] = useUser()
+    if (!user) {
         return <Navigate to="/login" replace />
+    } else {
+        return children
     }
-
-    return children
 }

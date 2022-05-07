@@ -1,3 +1,5 @@
+import { getDefaultHeaders } from "./auth"
+
 export default async function signupUser(email, password, confirmPassword) {
     const opts = {
         method: "POST",
@@ -6,9 +8,7 @@ export default async function signupUser(email, password, confirmPassword) {
             password,
             confirmPassword
         }),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: getDefaultHeaders()
     }
 
     try {

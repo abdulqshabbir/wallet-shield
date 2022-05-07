@@ -5,13 +5,24 @@ import ErrorCard from "../components/Authentication/ErrorCard"
 import { setTokensInLocalStorage } from "../services/auth"
 import jwt from "jwt-decode"
 import { useUser } from "../contexts/User"
+import getCategories from "../services/getCategories"
+import getExpenses from "../services/getExpenses"
+import { useCategories } from "../contexts/Categories"
+import { useExpenses } from "../contexts/Expenses"
 
 export default function Login() {
+    // Local state
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ error, setError ] = useState("")
+
+    // Navigation
     const navigate = useNavigate()
-    const [ user, setUser ] = useUser()
+
+    // Context
+    const [ , setUser ] = useUser()
+    const [ , setCategories ] = useCategories()
+    const [ , setExpenses ] = useExpenses()
 
     async function handleUserLogin() {
         let res = await loginUser(email, password)
@@ -20,11 +31,30 @@ export default function Login() {
             let { error } =  await res.json()
             setError(error)
         } else {
-            let { accessToken, refreshToken } = await res.json()
-            setTokensInLocalStorage(accessToken, refreshToken)
-            let userFromToken = jwt(refreshToken)
-            setUser({ email: userFromToken.email })
-            navigate('/')
+            try {
+                // set tokens in local storage
+                let { accessToken, refreshToken } = await res.json()
+                setTokensInLocalStorage(accessToken, refreshToken)
+
+                // set user in react state
+                let userFromToken = jwt(refreshToken)
+                setUser({ email: userFromToken.email })
+
+                // set user info on log in
+                let userCategories = await getCategories()
+                if (userCategories) {
+                    setCategories(userCategories)
+                }
+                let userExpenses = await getExpenses()
+                if (userExpenses) {
+                    setExpenses(userExpenses)
+                }
+
+                // navigate
+                navigate('/')
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 

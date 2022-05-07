@@ -1,5 +1,13 @@
+import { getBearerTokenFromLocalStorage } from "../services/auth"
+
 export default function getCategories() {
-    return fetch("/api/categories")
+    const opts = {
+        method: "GET",
+        headers: {
+            'Authorization': getBearerTokenFromLocalStorage()
+        }
+    }
+    return fetch("/api/categories", opts)
     .then(res => {
         if (res.status === 200) {
             return res.json()
@@ -7,5 +15,7 @@ export default function getCategories() {
             return null
         }
     })
-    .catch(e => console.log(e))
+    .catch(e => {
+        throw new Error(e.message)
+    })
 }

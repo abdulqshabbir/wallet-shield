@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { getUserFromLocalStorage } from "../services/auth"
+import isUserLoggedIn from "../services/isUserLoggedIn"
 
 const User = React.createContext()
 
@@ -9,7 +10,6 @@ export function useUser() {
 
 export default function UserProvider({ children }) {
     const [ user, setUser ] = useState(getUserFromLocalStorage())
-
     return(
         <User.Provider value={[user, setUser]}>
             {children}

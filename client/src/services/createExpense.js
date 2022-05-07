@@ -1,3 +1,5 @@
+import { getDefaultHeaders } from "./auth"
+
 export default async function createExpense(name, max, remaining, categoryId) {
     const opts = {
         method: "POST",
@@ -7,9 +9,7 @@ export default async function createExpense(name, max, remaining, categoryId) {
             remaining,
             categoryId
         }),
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: getDefaultHeaders()
     }
 
     try {
@@ -18,7 +18,7 @@ export default async function createExpense(name, max, remaining, categoryId) {
         let newExpense = await res.json()
         return newExpense
     } catch(e) {
-        throw new Error(e) 
+        throw new Error(e.message) 
     }
 }
 

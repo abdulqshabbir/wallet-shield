@@ -17,3 +17,19 @@ export function getUserFromLocalStorage() {
     let user = jwt(refreshToken)
     return { email: user.email }
 }
+
+export function getBearerTokenFromLocalStorage() {
+    let token = localStorage.getItem("accessToken")
+    if (!token) {
+        return ""
+    } else {
+        return `Bearer ${token}`
+    }
+}
+
+export function getDefaultHeaders() {
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': getBearerTokenFromLocalStorage(),
+    }
+}
