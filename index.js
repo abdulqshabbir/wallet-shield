@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken"
 // models
 import Category from './models/Category.js'
 import Expense from './models/Expense.js'
-import { Transaction } from "./models/Transaction.js"
+import Transaction from "./models/Transaction.js"
 import User from './models/User.js'
 import RefreshToken from './models/RefreshToken.js'
 
@@ -155,6 +155,7 @@ app.delete("/api/logout", async (req, res) => {
 	}
 })
 
+//=============  Expense ROUTES =============//
 app.get("/api/expenses", authenticateToken, (req, res) => {
 	const userId = req.user.id
 	Expense.findAll({ where : { userId } })
@@ -165,49 +166,6 @@ app.get("/api/expenses", authenticateToken, (req, res) => {
 			console.log(e)
 			res.status(500).send({error: "Internal server error"})
 		})
-})
-
-app.get("/api/categories", authenticateToken, (req, res) => {
-	const userId = req.user.id	
-	Category
-	.findAll({ where: { userId }})
-	.then(categories => {
-		res.status(200).send(categories)
-	})
-	.catch(e => {
-		console.log(e)
-		res.status(500).send({error: "Internal server error"})
-	})
-})
-
-app.post("/api/categories", authenticateToken, (req, res) => {
-	const name = req.body.name
-	const user = req.user
-	Category.create({
-		name,
-		userId: user.id
-	}).then (category => {
-		res.status(200).send(category)
-	}).catch(e => {
-		res.status(500).send({error: "Internal server error"})
-		console.log(e)
-	})
-})
-
-app.delete("/api/categories/:id", async (req, res) => {
-	const id = req.params.id
-
-	try {
-		let category = await Category.findByPk(id)
-		if (!category) {
-			return res.status(400).send({error: "Cannot delete a category that is not in the DB."})	
-		} else {
-			await category.destroy()
-			return res.status(200).send("Category successfully deleted.")
-		}
-	} catch(e) {
-		return res.status(500).send({error: "Internal server error."})
-	}
 })
 
 app.post("/api/expenses", authenticateToken, (req, res) => {
@@ -238,8 +196,54 @@ app.post("/api/expenses", authenticateToken, (req, res) => {
 
 })
 
-app.get("/api/transactions", (req, res) => {
-	Transaction.findAll()
+//=============  categories ROUTES =============//
+app.get("/api/categories", authenticateToken, (req, res) => {
+	const userId = req.user.id	
+	Category
+	.findAll({ where: { userId }})
+	.then(categories => {
+		res.status(200).send(categories)
+	})
+	.catch(e => {
+		console.log(e)
+		res.status(500).send({error: "Internal server error"})
+	})
+})
+
+app.post("/api/categories", authenticateToken, (req, res) => {
+	const name = req.body.name
+	const user = req.user
+	Category.create({
+		name,
+		userId: user.id
+	}).then (category => {
+		res.status(200).send(category)
+	}).catch(e => {
+		res.status(500).send({error: "Internal server error"})
+		console.log(e)
+	})
+})
+
+app.delete("/api/categories/:id", authenticateToken, async (req, res) => {
+	const id = req.params.id
+
+	try {
+		let category = await Category.findByPk(id)
+		if (!category) {
+			return res.status(400).send({error: "Cannot delete a category that is not in the DB."})	
+		} else {
+			await category.destroy()
+			return res.status(200).send("Category successfully deleted.")
+		}
+	} catch(e) {
+		return res.status(500).send({error: "Internal server error."})
+	}
+})
+
+//=============  transactions ROUTES =============//
+app.get("/api/transactions", authenticateToken, (req, res) => {
+	const userId = req.user.id
+	Transaction.findAll({ where: {userId} })
 		.then(expenses => {
 			res.status(200).send(expenses)
 		})
@@ -248,8 +252,9 @@ app.get("/api/transactions", (req, res) => {
 		})
 })
 
-app.post("/api/transactions", async(req, res) => {
+app.post("/api/transactions", authenticateToken, async(req, res) => {
 	let { amount, isOutflow, expenseId, repeat, memo, date } = req.body
+	const userId = req.user.id
 	amount = parseFloat(amount)
 	expenseId = parseFloat(expenseId)
 
@@ -263,7 +268,8 @@ app.post("/api/transactions", async(req, res) => {
 				expenseId,
 				repeat,
 				memo: memo ? memo : null,
-				date
+				date,
+				userId
 			})
 
 			const expense = await Expense.findByPk(expenseId)

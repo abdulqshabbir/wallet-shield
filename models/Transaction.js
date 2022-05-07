@@ -8,7 +8,7 @@ import Expense from './Expense.js'
     let sequelize do this or it will throw a cryptic error message
 */
 
-export const Transaction = db.define("transaction", {
+const Transaction = db.define("transaction", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -37,3 +37,5 @@ export const Transaction = db.define("transaction", {
 })
 
 Transaction.belongsTo(Expense)
+
+export default Transaction

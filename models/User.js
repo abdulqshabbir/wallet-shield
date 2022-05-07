@@ -1,6 +1,7 @@
 import { Sequelize} from 'sequelize'
 import Category from "./Category.js"
 import Expense from './Expense.js'
+import Transaction from "./Transaction.js"
 import db from '../config/db.config.js'
 
 const User = db.define("user", {
@@ -21,5 +22,6 @@ const User = db.define("user", {
 
 User.hasMany(Category, { onDelete: "cascade" })
 User.hasMany(Expense, { onDelete: "cascade" })
+User.hasMany(Transaction, { onDelete: "cascade" })
 
 export default User 
