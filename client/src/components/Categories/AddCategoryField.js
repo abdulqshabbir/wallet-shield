@@ -1,20 +1,26 @@
 import React, { useState } from "react"
 import { useCategories } from "../../contexts/Categories"
 import createCategory from "../../services/createCategory"
+import Button from "../Button"
+import Spinner from "../Spinner"
 
 export default function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	const [categories, setCategories] = useCategories()
 	const [cName, setcName] = useState("")
 	const [error, setError] = useState(null)
+	const [loading, setLoading] = useState(false)
 	function createNewCategory() {
+		setLoading(true)
 		createCategory(cName)
 			.then(newCategory => {
+				setLoading(false)
 				setCategories([...categories, newCategory ])
 				setcName("")
 				setRenderAddCategory(false)
 				setError(null)
 			})
 			.catch(e => {
+				setLoading(false)
 				setError(e.message)
 			})
 	}
@@ -34,7 +40,9 @@ export default function AddCategoryField({ renderAddCategory, setRenderAddCatego
                     <p>{error}</p>
                 </div>
                 <div className="my-2 flex justify-center items-center">
-                    <button onClick={() => createNewCategory()} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
+					<Button onClick={createNewCategory}>
+						{ loading ? <Spinner /> : "Create New Category" }
+					</Button>
                 </div>
 			</React.Fragment>
 		)

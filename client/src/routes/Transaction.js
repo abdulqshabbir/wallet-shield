@@ -8,12 +8,15 @@ import { faArrowDown } from "@fortawesome/free-solid-svg-icons"
 import createTransaction from "../services/createTransaction"
 import getExpenses from "../services/getExpenses"
 import { useNavigate } from "react-router-dom"
+import Button from "../components/Button"
+import Spinner from "../components/Spinner"
 
 export default function AddTransaction() {
     // UI state
     const [ isLeft, setIsLeft ] = useState(false)
     const [ isRed, setIsRed ] = useState(true)
     const navigate = useNavigate()
+    const [ isLoading, setIsLoading ] = useState(false)
 
     // transaction state
     const [ expenses, setExpenses ] = useExpenses()
@@ -31,15 +34,19 @@ export default function AddTransaction() {
     }
 
     function createNewTransaction() {
-        console.log(amount)
+        setIsLoading(true)
         createTransaction(amount, isOutflow, expenseId, repeat, memo, date)
         .then(() => {
             getExpenses()
             .then(expenses => {
+                setIsLoading(false)
                 setExpenses(expenses)
                 navigate("/")
             })
-            .catch(e => console.error(e))
+            .catch(e => {
+                console.error(e)
+                setIsLoading(false)
+            })
         })
         .catch(e => console.error(e))
     }
@@ -114,9 +121,16 @@ export default function AddTransaction() {
                 className="w-full h-12 p-4 focus:border-[1px] focus:outline-none"
             />
             <div className="flex justify-center">
-                <button onClick={createNewTransaction} className="w-[95%] h-14 m-2 font-normal text-[22px] rounded-lg text-white bg-primaryBlue">
-                    Save Transaction
-                </button>
+                <Button onClick={createNewTransaction}>
+                    <span className="">
+                        { 
+                            isLoading ? 
+                            <Spinner /> : 
+                            `Save Transaction`
+                        }
+
+                    </span>
+                </Button>
             </div>
             <Footer/>
         </SiteWrapper>
