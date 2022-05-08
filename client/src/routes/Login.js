@@ -9,12 +9,15 @@ import getCategories from "../services/getCategories"
 import getExpenses from "../services/getExpenses"
 import { useCategories } from "../contexts/Categories"
 import { useExpenses } from "../contexts/Expenses"
+import Spinner from "../components/Spinner"
+import Button from "../components/Button"
 
 export default function Login() {
     // Local state
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ error, setError ] = useState("")
+    const [ loading, setLoading ] = useState(false)
 
     // Navigation
     const navigate = useNavigate()
@@ -25,10 +28,11 @@ export default function Login() {
     const [ , setExpenses ] = useExpenses()
 
     async function handleUserLogin() {
+        setLoading(true)
         let res = await loginUser(email, password)
-
         if (res.status > 200) {
             let { error } =  await res.json()
+            setLoading(false)
             setError(error)
         } else {
             try {
@@ -50,6 +54,7 @@ export default function Login() {
                     setExpenses(userExpenses)
                 }
 
+                setLoading(false)
                 // navigate
                 navigate('/')
             } catch(e) {
@@ -76,8 +81,10 @@ export default function Login() {
                             <Input type={"email"} placeholder={"Email address"} value={email} onChangeHandler={e => setEmail(e.target.value)} onFocusHandler={e => setError("")} />
                             <Input type={"password"} placeholder={"Password"} value={password} onChangeHandler={e => setPassword(e.target.value)} onFocusHandler={e => setError("")} />
                         </form>
+                        <Button onClick={handleUserLogin}>
+                            { loading ? <Spinner /> : `Log In` }
+                        </Button>
                         <ErrorCard message={error} /> 
-                        <button onClick={handleUserLogin} className="h-12 text-white font-light bg-primaryBlue rounded-md hover:bg-blue-400">Log In</button>
                     </div>
                 </main>
             </div>
