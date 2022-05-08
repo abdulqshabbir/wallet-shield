@@ -25,9 +25,11 @@ try {
 }
 
 // This runs the DROP TABLE IF EXISTS query
-(async () => {
-	await db.sync({ force: true })
-})()
+if (process.env.NODE_ENV !== "production") {
+	(async () => {
+		await db.sync({ force: true })
+	})()
+}
 
 // allow all cross origin requests
 app.use(cors())
