@@ -27,8 +27,8 @@ export default function ExpenseListPerCategory({ categoryName, expenses, categor
 		Expenses = null
 	}
 
-    return (
-        <React.Fragment>
+	return (
+		<React.Fragment>
 			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px]">
 				<div onClick={() => setShowExpenses(!showExpenses)} className="text-normal font-semibold flex justify-center items-center hover:cursor-pointer">
 					<FontAwesomeIcon
@@ -40,8 +40,8 @@ export default function ExpenseListPerCategory({ categoryName, expenses, categor
 				<h2 className="font-light text-gray-700">{`${totalRemainingInCategory(categoryId, expenses)} CAD`}</h2>
 			</div>
 			{ Expenses }
-        </React.Fragment>
-    )
+		</React.Fragment>
+	)
 }
 
 function totalRemainingInCategory(id, expenses) {
