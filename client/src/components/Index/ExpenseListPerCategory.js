@@ -29,8 +29,8 @@ export default function ExpenseListPerCategory({ categoryName, expenses, categor
 
 	return (
 		<React.Fragment>
-			<div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px]">
-				<div onClick={() => setShowExpenses(!showExpenses)} className="text-normal font-semibold flex justify-center items-center hover:cursor-pointer">
+			<div onClick={() => setShowExpenses(!showExpenses)} className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px] hover:cursor-pointer">
+				<div className="text-normal font-semibold flex justify-center items-center">
 					<FontAwesomeIcon
 						className="hover:cursor-pointer hover:scale-125"
 						icon={fontIcon}

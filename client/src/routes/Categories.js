@@ -25,5 +25,12 @@ export default function Categories() {
 
 function RenderCategories() {
 	const [categories, ] = useCategories()
-	return categories.map(c => <Category key={c.id} category={c} /> )
+	return (
+		<React.Fragment>
+			{categories.map(c => <Category key={c.id} category={c} /> )}
+
+			{/* div underneath is needed because footer is position-fixed and hides content at the end of the list */}
+			<div className='w-full h-14'></div>
+		</React.Fragment>
+	)
 }
