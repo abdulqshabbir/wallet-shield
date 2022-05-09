@@ -8,7 +8,7 @@ import { useUser } from "../contexts/User"
 import logoutUser from "../services/logoutUser"
 
 function Footer() {
-	const [ use, setUser ] = useUser()
+	const [ , setUser ] = useUser()
 	async function handleLogout() {
 		const res = await logoutUser()
 		if (res.status === 204) {

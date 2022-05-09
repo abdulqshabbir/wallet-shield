@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useCategories } from '../../contexts/Categories'
 import { useExpenses } from '../../contexts/Expenses'
-import { Bars, MutatingDots } from 'react-loader-spinner'
+import { MutatingDots } from 'react-loader-spinner'
 import ExpenseListPerCategory from "./ExpenseListPerCategory"
 
 export default function CategoriesAndExpensesList() {
@@ -13,7 +13,7 @@ export default function CategoriesAndExpensesList() {
 			setLoading(false)
 		}, 300)
 	}, [])
-	if ( loading) {
+	if (loading) {
 		return (
 			<div className='h-[60vh] flex justify-center items-center'>
 				<MutatingDots heigth="100" width="100" color="grey" ariaLabel="loading-indicator" />
