@@ -1,10 +1,8 @@
 import React, { useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlusSquare } from "@fortawesome/free-solid-svg-icons"
-import colors from "../../constants/colors"
 import { useCategories } from "../../contexts/Categories"
 import createCategory from "../../services/createCategory"
 import Spinner from "../Spinner"
+import { FiPlusSquare } from "react-icons/fi"
 
 export default function TableHeader() {
     const [showCategoryField, setShowCategoryField] = useState(false)
@@ -12,17 +10,15 @@ export default function TableHeader() {
     return(
         <React.Fragment>
             <div className="h-14 px-4 flex flex-wrap justify-between items-center border-y-[1px]">
-				<h3 className="text-base text-gray-500 relative">
+				<div className="flex items-center flex-wrap text-base text-gray-500 relative">
                     <span>CATEGORY</span>
-                    <FontAwesomeIcon
-                        icon={faPlusSquare}
-                        color={colors.primaryBlue}
-                        className="mx-2 cursor-pointer"
-                        size="lg"
+                    <FiPlusSquare
+                        className="mx-4 cursor-pointer hover:scale-125"
+                        size="20px"
                         onClick={() => setShowCategoryField(!showCategoryField)}
                     />
                     <AddCategoryField render={showCategoryField} setRender={setShowCategoryField} />
-                </h3>
+                </div>
 				<h3 className="text-base text-gray-500">AVAILABLE</h3>
 			</div>	
         </React.Fragment>
@@ -55,7 +51,7 @@ function AddCategoryField({ render, setRender }) {
     }
     if(render) {
         return (
-            <div className=" h-58 w-60 absolute p-4 flex flex-col justify-center text-white z-10 bg-gray-500">
+            <div className=" h-58 w-60 absolute top-8 p-4 flex flex-col justify-center text-white z-10 bg-gray-500">
                 <input value={categoryName} onChange={e => setCategoryName(e.target.value)} className="h-12 p-2 my-2 text-black" placeholder="Category Name"/>
                 <button
                     onClick={createNewCategory}
