@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPenToSquare, faCircleChevronDown, faTree } from "@fortawesome/free-solid-svg-icons"
-import colors from '../constants/colors'
+import { FiHome, FiEdit } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import React from "react"
 
@@ -9,28 +7,13 @@ function Header() {
 		 <React.Fragment>
 				<header className="header grid grid-cols-5 lg:grid-cols-3 justify-items-center pt-4 pb-2 border-b-[1px]">
 					<Link to="/">
-						<FontAwesomeIcon
-							className="cursor-pointer pt-1 hover:text-blue-400"
-							icon={faTree}
-							color={colors.primaryBlue}
-							size="sm"
-						/>
+						<FiHome />
 					</Link>
 					<h1 className="col-span-3 lg:col-span-1">
 						<span className="font-medium">April&nbsp;2022</span>
-						<FontAwesomeIcon
-							className="pl-2"
-							icon={faCircleChevronDown}
-							size="sm"
-						/>
 					</h1>
 					<Link to="/categories">
-						<FontAwesomeIcon
-							className="cursor-pointer pt-2 hover:text-blue-400"
-							icon={faPenToSquare}
-							color={colors.primaryBlue}
-							size="sm"
-						/>
+						<FiEdit />
 					</Link>
 				</header>
 		 </React.Fragment>

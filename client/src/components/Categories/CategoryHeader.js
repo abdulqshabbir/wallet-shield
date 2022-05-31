@@ -1,6 +1,5 @@
 import React from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCirclePlus, faCircleMinus, faGripHorizontal } from "@fortawesome/free-solid-svg-icons"
+import { FiPlusSquare, FiMinusSquare } from "react-icons/fi"
 import deleteCategory from "../../services/deleteCategory"
 
 import getCategories from "../../services/getCategories"
@@ -28,14 +27,19 @@ export default function CategoryHeader({ category, setRenderAddExpenseField }) {
 
     return(
         <React.Fragment>
-            <div className="h-14 px-4 flex flex-wrap justify-between items-center bg-primaryGray-100 border-b-[1px] border-x-[1px]">
-                <div className="mx-8 flex justify-center items-center">
-                    <h2 className="overflow-ellipsis">{category.name}</h2>	
-                    <FontAwesomeIcon onClick={e => handleCategoryDelete(e)} className="ml-4 cursor-pointer hover:scale-125" icon={faCircleMinus} />
-                </div>
-                <div className="mx-8 flex justify-center items-center">
-                    <FontAwesomeIcon onClick={() => setRenderAddExpenseField(true)} className="hover:cursor-pointer hover:scale-125" icon={faCirclePlus} />
-                    <FontAwesomeIcon className="ml-4" icon={faGripHorizontal} />
+            <div className="h-14 px-4 flex justify-between items-center bg-primaryGray-100 border-b-[1px] border-x-[1px]">
+                <h2 className="px-4 overflow-ellipsis">
+                    {category.name}
+                </h2>	
+                <div className="flex flex-row">
+                    <FiMinusSquare
+                        onClick={e => handleCategoryDelete(e)}
+                        className="cursor-pointer hover:scale-125" 
+                    />
+                    <FiPlusSquare
+                        onClick={() => setRenderAddExpenseField(true)}
+                        className="ml-4 hover:cursor-pointer hover:scale-125"
+                    />
                 </div>
             </div> 
         </React.Fragment>

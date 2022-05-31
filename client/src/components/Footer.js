@@ -1,8 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCirclePlus, faDoorOpen } from "@fortawesome/free-solid-svg-icons"
 import React from "react"
+import { FiLogOut, FiPlus } from "react-icons/fi"
 import {Link} from "react-router-dom"
-import colors from "../constants/colors"
 import { clearTokensFromLocalStorage } from "../services/auth"
 import { useUser } from "../contexts/User"
 import logoutUser from "../services/logoutUser"
@@ -18,12 +16,12 @@ function Footer() {
 	}
 	return (
 		<React.Fragment>
-			<div className="w-full max-w-5xl mx-auto h-14 grid grid-cols-2 items-center px-12 fixed bottom-0 z-10 bg-white border-t-[1px]">
-				<Link to="/transaction" className='hover:scale-125 text-center'>
-					<FontAwesomeIcon icon={faCirclePlus} color={colors.primaryBlue} />
+			<div className="w-full max-w-5xl mx-auto h-14 flex items-center justify-center fixed bottom-0 z-10 bg-white border-t-[1px]">
+				<Link to="/transaction">
+					<FiPlus />
 				</Link>
-				<Link onClick={handleLogout} to="/login" className='hover:scale-125 text-center'>
-					<FontAwesomeIcon icon={faDoorOpen} color={colors.primaryBlue} />
+				<Link onClick={handleLogout} to="/login" className="pl-10">
+					<FiLogOut />
 				</Link>
 			</div>
 		</React.Fragment>
