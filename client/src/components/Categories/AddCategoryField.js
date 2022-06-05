@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useCategories } from "../../contexts/Categories"
 import createCategory from "../../services/createCategory"
-import Button from "../Button"
-import Spinner from "../Spinner"
+import Button from "../Shared/Button"
+import Spinner from "../Shared/Spinner"
 
 export default function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	const [categories, setCategories] = useCategories()

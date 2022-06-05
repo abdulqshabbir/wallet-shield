@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import Header from "../components/Header"
+import Header from "../components/Shared/Header"
 import { useCategories } from "../contexts/Categories"
-import SiteWrapper from "../components/SiteWrapper"
+import SiteWrapper from "../components/Shared/SiteWrapper"
 import AddCategoryButton from "../components/Categories/AddCategoryButton"
 import AddCategoryField from "../components/Categories/AddCategoryField"
-import Footer from "../components/Footer"
+import Footer from "../components/Shared/Footer"
 import Category from "../components/Categories/Category"
-import Protected from "../components/Protected"
+import Protected from "../components/Shared/Protected"
 
 export default function Categories() {
 	const [renderAddCategory, setRenderAddCategory] = useState(false)

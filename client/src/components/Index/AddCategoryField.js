@@ -1,5 +1,5 @@
 import React from "react"
-import Spinner from "../Spinner"
+import Spinner from "../Shared/Spinner"
 import { useState } from "react"
 import { useCategories } from "../../contexts/Categories"
 import createCategory from "../../services/createCategory"

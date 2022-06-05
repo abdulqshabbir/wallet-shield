@@ -1,9 +1,9 @@
 import React from "react"
 import { FiLogOut, FiPlus } from "react-icons/fi"
 import {Link} from "react-router-dom"
-import { clearTokensFromLocalStorage } from "../services/auth"
-import { useUser } from "../contexts/User"
-import logoutUser from "../services/logoutUser"
+import { clearTokensFromLocalStorage } from "../../services/auth"
+import { useUser } from "../../contexts/User"
+import logoutUser from "../../services/logoutUser"
 
 function Footer() {
 	const [ , setUser ] = useUser()
