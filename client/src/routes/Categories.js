@@ -4,20 +4,20 @@ import { useCategories } from "../contexts/Categories"
 import SiteWrapper from "../components/Shared/SiteWrapper"
 import AddCategoryButton from "../components/Categories/AddCategoryButton"
 import AddCategoryField from "../components/Categories/AddCategoryField"
-import Footer from "../components/Shared/Footer"
 import Category from "../components/Categories/Category"
 import Protected from "../components/Shared/Protected"
+import NavigationModal from "../components/NavigationModal"
 
 export default function Categories() {
 	const [renderAddCategory, setRenderAddCategory] = useState(false)
 	return (
 		<Protected>
 			<SiteWrapper>
+				<NavigationModal />
 				<Header/>
 				<AddCategoryButton setRenderAddCategory={setRenderAddCategory} />
 				<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
 				<RenderCategories/>
-				<Footer/>
 			</SiteWrapper>
 		</Protected>
 	)

@@ -19,6 +19,8 @@ module.exports = {
       primaryRed: "rgb(188, 81, 45)",
       buttonBlue: "rgb(89, 147, 210)",
       primaryBlue: 'rgb(46, 152, 212)',
+      lightBlue: "rgb(69, 112, 160)",
+      darkBlue: 'rgb(44,68, 97)',
       primaryGray: {
         100: "rgb(242, 242, 246)", 
         200: "rgb(228, 228, 233)",

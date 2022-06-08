@@ -1,20 +1,17 @@
-import { FiHome, FiEdit } from "react-icons/fi"
-import { Link } from "react-router-dom"
+import { TbDotsCircleHorizontal } from "react-icons/tb"
 import React from "react"
+import { useModal } from "../../contexts/Modal"
 
 function Header() {
+	const [modal, setModal] = useModal()
 	 return (
 		 <React.Fragment>
-				<header className="header grid grid-cols-5 lg:grid-cols-3 justify-items-center pt-4 pb-2 border-b-[1px]">
-					<Link to="/">
-						<FiHome />
-					</Link>
-					<h1 className="col-span-3 lg:col-span-1">
-						<span className="font-medium">April&nbsp;2022</span>
-					</h1>
-					<Link to="/categories">
-						<FiEdit />
-					</Link>
+				<header className="header flex justify-between items-center px-4 py-4 border-b-[1px]">
+					<span className="font-medium">April&nbsp;2022</span>
+					<TbDotsCircleHorizontal
+						className="cursor-pointer"
+						onClick={() => setModal(true)}
+					/>
 				</header>
 		 </React.Fragment>
 	 )
