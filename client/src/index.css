@@ -1,3 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* side navigation when xl screen */
+.sidenav {
+  height: 100%;
+  width: 22%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* center overflown text */
+.text-overflow-center {
+    margin-left: -100%;
+    margin-right: -100%;
+    text-align: center;
+}
+
+/*                                     norm    min       max   */
+body              { font-size: min(max(0.8rem, 4vw),  1.25rem); }
+.expense          { font-size: min(max(0.8rem, 4vw),     1rem); }
+.expense-category { font-size: min(max(0.8rem, 4vw),  1.25rem); }
+.footer           { font-size: min(max(0.8rem, 5vw), 1.375rem); }
+.header           { font-size: min(max(0.8rem, 6vw),  1.75rem); }
+.sidebar          { font-size: min(max(0.8rem, 6vw),  1.25rem); }
+
+
+/* hide up/down arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* styling of drop-down lists */
+.categories-dropdown-container{
+  font-size: 1rem;
+  width: 30%;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .categories-dropdown-container {
+    width: 50%;
+  }
+}
+
+.categories-dropdown-container .select{
+  width: 120%;
+}
+
+.categories-dropdown-container .select select{
+  background: transparent;
+  line-height: 1;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  height: 100%;
+  width: 150%;
+  position: relative;
+  left: -20px;
+  z-index: 10;
+  font-size: 1em;
+  margin-left: 1rem;
+}
