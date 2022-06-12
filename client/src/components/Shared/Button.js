@@ -13,7 +13,6 @@ function getButtonWidth(width) {
     if (!width) {
         return "w-[95%]"
     } else {
-        console.log(`w-[${width}]`)
         return `w-[${width}]`
     }
 
