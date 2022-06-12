@@ -6,12 +6,18 @@ import getCategories from "../../services/getCategories"
 import getExpenses from "../../services/getExpenses"
 import { useCategories } from "../../contexts/Categories"
 import { useExpenses } from "../../contexts/Expenses"
+import { ICategory } from "../../types/cateogry"
 
-export default function CategoryHeader({ category, setRenderAddExpenseField }) {
+interface IProps {
+    category: ICategory,
+    setRenderAddExpenseField: (render: boolean) => void
+}
+
+export default function CategoryHeader({ category, setRenderAddExpenseField }: IProps) {
     let [ , setExpenses ] = useExpenses()
     let [ , setCategories ] = useCategories()
 
-    async function handleCategoryDelete(e) {
+    async function handleCategoryDelete(e: React.MouseEvent) {
         try {
             let isDeleted = await deleteCategory(category.id)
             if (isDeleted) {

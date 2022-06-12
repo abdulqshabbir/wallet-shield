@@ -2,7 +2,13 @@ import React, { useState } from "react"
 import createExpense from "../../services/createExpense"
 import { useExpenses } from "../../contexts/Expenses"
 
-export default function AddExpenseField({ renderField, setRenderField, cId }) {
+interface IProps {
+	renderField: boolean,
+	setRenderField: (render: boolean) => void,
+	cId: number 
+}
+
+export default function AddExpenseField({ renderField, setRenderField, cId }: IProps) {
 	const [expenses, setExpenses] = useExpenses()
 	const [name, setName] = useState("")
 	const [max, setMax] = useState("")
