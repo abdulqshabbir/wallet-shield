@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import "./index.css"
 import IndexPage from "./routes/Index"
 import Categories from "./routes/Categories"
@@ -12,7 +12,10 @@ import Signup from "./routes/Signup"
 import UserProvider from "./contexts/User"
 import ModalProvider from "./contexts/Modal"
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = createRoot(container)
+
+root.render(
   // browser router connects our react app to the browser URL
   <React.StrictMode>
     <BrowserRouter>
@@ -32,7 +35,6 @@ ReactDOM.render(
       </CategoriesProvider>
     </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
 
