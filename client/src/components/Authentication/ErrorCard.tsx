@@ -1,4 +1,8 @@
-export default function ErrorCard({ message }) {
+interface IProps {
+    message: string
+}
+
+export default function ErrorCard({ message }: IProps) {
     if (message === "") return null
 
     return (
