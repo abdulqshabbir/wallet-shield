@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import { useUser } from "./../contexts/User"
+import { useUser } from "../../contexts/User"
 import Spinner from "./Spinner"
 
 export default function Protected({ children }) {

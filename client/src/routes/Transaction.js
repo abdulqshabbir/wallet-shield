@@ -1,16 +1,16 @@
 import React, { useState } from "react"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import SiteWrapper from "../components/SiteWrapper"
+import Header from "../components/Shared/Header"
+import SiteWrapper from "../components/Shared/SiteWrapper"
 import { useExpenses } from "../contexts/Expenses"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons"
 import createTransaction from "../services/createTransaction"
 import getExpenses from "../services/getExpenses"
 import { useNavigate } from "react-router-dom"
-import Button from "../components/Button"
-import Spinner from "../components/Spinner"
-import Protected from "../components/Protected"
+import Button from "../components/Shared/Button"
+import Spinner from "../components/Shared/Spinner"
+import Protected from "../components/Shared/Protected"
+import NavigationModal from "../components/NavigationModal"
 
 export default function AddTransaction() {
     // UI state
@@ -63,6 +63,7 @@ export default function AddTransaction() {
 	return (
         <Protected>
             <SiteWrapper>
+                <NavigationModal />
                 <Header/>
                 <header className="h-14 px-4 flex flex-wrap justify-center items-center border-b-[1px]">
                     <h1 className="font-medium text-1xl">Add Transaction</h1>
@@ -134,7 +135,6 @@ export default function AddTransaction() {
                         </span>
                     </Button>
                 </div>
-                <Footer/>
             </SiteWrapper>
         </Protected>
 	)
