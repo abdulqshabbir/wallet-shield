@@ -81,3 +81,17 @@ input[type=number] {
   font-size: 1em;
   margin-left: 1rem;
 }
+
+@keyframes slide-down {
+  from {
+    bottom: 100vh;
+  }
+  to {
+    bottom: 0vh;
+  }
+}
+.slide-down {
+  animation-name: slide-down;
+  animation-duration: 300ms;
+  animation-timing-function: ease;
+}

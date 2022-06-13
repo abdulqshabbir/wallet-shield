@@ -6,6 +6,7 @@ import { clearTokensFromLocalStorage } from "../../services/auth"
 import { useUser } from "../../contexts/User"
 import logoutUser from "../../services/logoutUser"
 import { useModal } from "../../contexts/Modal"
+import { VscChromeClose } from "react-icons/vsc"
 
 export default function NavigationModal() {
     const [ user, setUser ] = useUser()
@@ -24,11 +25,12 @@ export default function NavigationModal() {
         return null
     } else {
         return(
-            <div className="fixed h-[100vh] w-[100vw] py-32 mx-auto max-w-5xl flex flex-col justify-evenly items-start z-20 bg-darkBlue text-white">
-                <div className="flex flex-col w-5/6 mx-auto justify-center items-center h-12 rounded-md">
-                    <p className="text-bg-lightBlue">Your Budget</p>
-                    <span>{user.email}</span>
-                </div>
+            <div className="fixed slide-down h-[100vh] w-[100vw] py-32 mx-auto max-w-5xl flex flex-col justify-evenly items-start z-20 bg-darkBlue text-white">
+                <VscChromeClose
+                    size="30px"
+                    className="absolute top-8 right-8 cursor-pointer"
+                    onClick={() => setModal(false)}
+                />
                 <Link onClick={() => setModal(false)} to="/" className={LINK_STYLES}>
                     <FaHome className="mr-4" size="27px" />
                     <p>Home</p>
