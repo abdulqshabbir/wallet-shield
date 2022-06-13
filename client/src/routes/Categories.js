@@ -13,7 +13,6 @@ export default function Categories() {
 	return (
 		<Protected>
 			<SiteWrapper>
-				<NavigationModal />
 				<Header/>
 				<AddCategoryButton setRenderAddCategory={setRenderAddCategory} />
 				<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />

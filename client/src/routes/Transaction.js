@@ -63,7 +63,6 @@ export default function AddTransaction() {
 	return (
         <Protected>
             <SiteWrapper>
-                <NavigationModal />
                 <Header/>
                 <header className="h-14 px-4 flex flex-wrap justify-center items-center border-b-[1px]">
                     <h1 className="font-medium text-1xl">Add Transaction</h1>

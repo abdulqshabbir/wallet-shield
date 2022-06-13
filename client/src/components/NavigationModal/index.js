@@ -7,11 +7,13 @@ import { useUser } from "../../contexts/User"
 import logoutUser from "../../services/logoutUser"
 import { useModal } from "../../contexts/Modal"
 import { VscChromeClose } from "react-icons/vsc"
+import useWindowDimensions from "../../contexts/useWindowDimensions"
 
 export default function NavigationModal() {
     const [ user, setUser ] = useUser()
     const [ modal, setModal ] = useModal()
-    const LINK_STYLES = "flex w-5/6 mx-auto justify-center items-center h-14 cursor-pointer rounded-md hover:bg-lightBlue"
+    const { width, height } = useWindowDimensions() 
+    const LINK_STYLES = "flex w-5/6 mx-auto justify-center items-center h-14 cursor-pointer rounded-md hover:bg-lightBlue lg:justify-start"
 
 	async function handleLogout() {
 		const res = await logoutUser()
@@ -21,27 +23,36 @@ export default function NavigationModal() {
 		}
 	}
 
+    function handleModalClose() {
+        if (width < 1024) {
+            setModal(false)
+        } 
+    }
+
     if (!modal) {
         return null
     } else {
         return(
-            <div className="fixed slide-down h-[100vh] w-[100vw] py-32 mx-auto max-w-5xl flex flex-col justify-evenly items-start z-20 bg-darkBlue text-white">
-                <VscChromeClose
-                    size="30px"
-                    className="absolute top-8 right-8 cursor-pointer"
-                    onClick={() => setModal(false)}
-                />
-                <Link onClick={() => setModal(false)} to="/" className={LINK_STYLES}>
-                    <FaHome className="mr-4" size="27px" />
+            <div className="fixed h-[100vh] w-[100vw] py-32 flex flex-col justify-evenly items-start z-20 bg-darkBlue text-white lg:max-w-[30%] lg:right-0 lg:pt-0 lg:pb-80">
+                { 
+                    width < 1024 &&
+                    <VscChromeClose
+                        size="30px"
+                        className="absolute top-8 right-8 cursor-pointer"
+                        onClick={handleModalClose}
+                    />
+                }
+                <Link onClick={handleModalClose} to="/" className={LINK_STYLES}>
+                    <FaHome className="ml-8 mr-4" size="27px" />
                     <p>Home</p>
                 </Link>
-                <Link onClick={() => setModal(false)} to="/transaction" className={LINK_STYLES}>
+                <Link onClick={handleModalClose} to="/transaction" className={LINK_STYLES}>
                     <div className={LINK_STYLES}>
                         <FiPlus className="mr-4" size="30px" />
                         <p>Add Transaction</p>
                     </div>
                 </Link>
-                <Link onClick={() => setModal(false)} to="/categories" className={LINK_STYLES}>
+                <Link onClick={handleModalClose} to="/categories" className={LINK_STYLES}>
                     <div className={LINK_STYLES}>
                         <FiEdit className="mr-4" size="25px" />
                         <p>Edit Categories</p>
