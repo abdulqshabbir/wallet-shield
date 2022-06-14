@@ -3,8 +3,14 @@ import { useExpenses } from "../../contexts/Expenses"
 import CategoryHeader from './CategoryHeader'
 import AddExpenseField from './AddExpenseField'
 import Expense from "./Expense"
+import { ICategory } from '../../types/cateogry'
+import { IExpense } from '../../types/expense'
 
-export default function Category({ category }) {
+interface IProps {
+	category: ICategory	
+}
+
+export default function Category({ category }: IProps) {
 	const [expenses, ] = useExpenses()
 	const [renderAddExpenseField, setRenderAddExpenseField] = useState(false)
 
@@ -12,14 +18,12 @@ export default function Category({ category }) {
 		<React.Fragment>
             <CategoryHeader category={category} setRenderAddExpenseField={setRenderAddExpenseField} />
 			<AddExpenseField renderField={renderAddExpenseField} setRenderField={setRenderAddExpenseField} cId={category.id} />
-			<RenderExpenses cId={category.id} expenses={expenses} />
+			{
+				expenses
+					.filter((e: IExpense) => e.categoryId === category.id)
+					.map((e: IExpense)=> <Expense key={e.id} expense={e} />)	
+			}
 		</React.Fragment>
 	)
 
-}
-
-function RenderExpenses({ cId, expenses }) {
-	return expenses
-	.filter(e => e.categoryId === cId)
-	.map(e => <Expense key={e.id} expense={e} />)	
 }

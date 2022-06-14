@@ -1,7 +1,15 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-export default function LoginForm({ email, password, setEmail, setPassword, setError }){
+interface IProps {
+    email: string,
+    password: string,
+    setEmail: (email: string) => void,
+    setPassword: (pass: string) => void,
+    setError: (error: string) => void
+}
+
+export default function LoginForm({ email, password, setEmail, setPassword, setError }: IProps){
     return(
         <React.Fragment>
             <h1 className="text-center text-4xl font-bold">
@@ -17,22 +25,31 @@ export default function LoginForm({ email, password, setEmail, setPassword, setE
                     type={"email"}
                     placeholder={"Email address"}
                     value={email}
-                    onChangeHandler={e => setEmail(e.target.value)}
-                    onFocusHandler={e => setError("")}
+                    onChangeHandler={(e: React.ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)}
+                    onFocusHandler={(e: React.FocusEvent<HTMLInputElement>) => setError("")}
                 />
 
                 <Input
                     type={"password"}
                     placeholder={"Password"}
                     value={password}
-                    onChangeHandler={e => setPassword(e.target.value)} onFocusHandler={e => setError("")}
+                    onChangeHandler={(e: React.ChangeEvent<HTMLInputElement> ) => setPassword(e.target.value)}
+                    onFocusHandler={(e: React.FocusEvent<HTMLInputElement> ) => setError("")}
                 />
             </form>
         </React.Fragment>
     )
 }
 
-function Input({ type, placeholder, value, onChangeHandler, onFocusHandler }) {
+interface InputProps {
+    type: "text" | "password" | "email",
+    placeholder: string,
+    value: string,
+    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement> ) => void,
+    onFocusHandler: (e: React.FocusEvent<HTMLInputElement> ) => void
+}
+
+function Input({ type, placeholder, value, onChangeHandler, onFocusHandler }: InputProps) {
     return (
         <input
             className="h-12 pl-4 mb-4 w-full border-primaryGray-300 border-[1px] rounded-md placeholder:text-sm placeholder:font-light"
