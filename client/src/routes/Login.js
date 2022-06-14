@@ -37,6 +37,9 @@ export default function Login() {
 
 	return (
         <React.Fragment>
+						<a href="https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values" className="underline text-[#5c5]">Using Arbitrary Values</a>
+						<br/>
+						<a href="https://tailwindcss.com/docs/guides/create-react-app" className="underline text-[#5c5]">Create React app with TypeScript</a>
             <AuthHeader />
                 <main className="max-w-[1000px] mx-auto min-h-[700px] flex flex-col flex-wrap justify-center items-center md:flex-row">
                     <LoginImage />

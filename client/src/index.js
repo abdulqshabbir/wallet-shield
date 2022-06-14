@@ -1,14 +1,15 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 import "./index.css"
 import IndexPage from "./routes/Index"
 import Categories from "./routes/Categories"
 import Transaction from "./routes/Transaction"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import CategoriesProvider from "./contexts/Categories"
-import ExpensesProvider from "./contexts/Expenses"
 import Login from "./routes/Login"
 import Signup from "./routes/Signup"
+import CategoriesProvider from "./contexts/Categories"
+import ExpensesProvider from "./contexts/Expenses"
 import UserProvider from "./contexts/User"
 import ModalProvider from "./contexts/Modal"
 
