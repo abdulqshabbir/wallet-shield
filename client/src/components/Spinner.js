@@ -1,12 +1,6 @@
 import { Oval } from "react-loader-spinner";
 
-interface IProps {
-    height?: string,
-    width?: string,
-    color?: string,
-}
-
-export default function Spinner({ height, width, color} : IProps) {
+export default function Spinner({ height, width, color }) {
     return (
         <Oval
             height={height ? height: `2.5rem`}

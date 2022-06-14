@@ -1,15 +1,10 @@
 import React, { useState } from "react"
 import { useCategories } from "../../contexts/Categories"
 import createCategory from "../../services/createCategory"
-import Button from "../Shared/Button"
-import Spinner from "../Shared/Spinner"
+import Button from "../Button"
+import Spinner from "../Spinner"
 
-interface IProps {
-	renderAddCategory: boolean,
-	setRenderAddCategory: (render: boolean) => void
-}
-
-export default function AddCategoryField({ renderAddCategory, setRenderAddCategory }: IProps) {
+export default function AddCategoryField({ renderAddCategory, setRenderAddCategory }) {
 	const [categories, setCategories] = useCategories()
 	const [cName, setcName] = useState("")
 	const [error, setError] = useState(null)
