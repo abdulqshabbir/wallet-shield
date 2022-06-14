@@ -16,8 +16,8 @@ import { useExpenses } from "../contexts/Expenses"
 
 // components
 import ErrorCard from "../components/Authentication/ErrorCard"
-import Spinner from "../components/Shared/Spinner"
-import Button from "../components/Shared/Button"
+import Spinner from "../components/Spinner"
+import Button from "../components/Button"
 import AuthHeader from "../components/Authentication/AuthHeader"
 import LoginForm from "../components/Authentication/LoginForm"
 import LoginImage from "../components/Authentication/LoginImage"
