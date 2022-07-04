@@ -1,5 +1,6 @@
 import { FaHome } from "react-icons/fa"
 import { FiEdit, FiPlus, FiLogOut } from "react-icons/fi"
+import { BiPieChart } from "react-icons/bi"
 import { Link } from "react-router-dom"
 
 import { clearTokensFromLocalStorage } from "../../services/auth"
@@ -56,6 +57,12 @@ export default function NavigationModal() {
                     <div className={LINK_STYLES}>
                         <FiEdit className="mr-4" size="25px" />
                         <p>Edit Categories</p>
+                    </div>
+                </Link>
+                <Link onClick={handleModalClose} to="/chart" className={LINK_STYLES}>
+                    <div className={LINK_STYLES}>
+                        <BiPieChart className="mr-4" size="25px" />
+                        <p>See Spending Chart</p>
                     </div>
                 </Link>
                 <Link onClick={

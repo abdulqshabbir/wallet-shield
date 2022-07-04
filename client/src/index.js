@@ -4,6 +4,7 @@ import "./index.css"
 import IndexPage from "./routes/Index"
 import Categories from "./routes/Categories"
 import Transaction from "./routes/Transaction"
+import Chart from "./routes/Chart"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import CategoriesProvider from "./contexts/Categories"
 import ExpensesProvider from "./contexts/Expenses"
@@ -26,6 +27,7 @@ ReactDOM.render(
                 <Route path="/transaction" element={ <Transaction /> } />
                 <Route path="/login" element={ <Login /> } />
                 <Route path="/signup" element={ <Signup /> } />
+                <Route path="/chart" element={ <Chart /> } />
             </Routes>
           </ModalProvider>
         </ExpensesProvider>
