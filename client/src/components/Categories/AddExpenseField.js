@@ -1,20 +1,27 @@
 import React, { useState } from "react"
 import createExpense from "../../services/createExpense"
 import { useExpenses } from "../../contexts/Expenses"
+import Spinner from "../Shared/Spinner"
 
-export default function AddExpenseField({ renderField, setRenderField, cId }) {
+export default function AddExpenseField({ render, setRender, cId }) {
 	const [expenses, setExpenses] = useExpenses()
 	const [name, setName] = useState("")
 	const [max, setMax] = useState("")
 	const [error, setError] = useState(null)
+	const [loading, setLoading] = useState(false)
+
+	function handleClose() {
+		setRender(false)
+	}
 
 	function createNewExpense() {
 		// validation requires strings be converted to numbers before
 		// making a POST request
+		setLoading(true)
 		createExpense(name, parseFloat(max), parseFloat(max), cId)
 			.then(newExpense => {
 				setError(null)
-				setRenderField(false)
+				setRender(false)
 				setName("")
 				setMax("")
 				setExpenses([...expenses, newExpense])
@@ -22,35 +29,38 @@ export default function AddExpenseField({ renderField, setRenderField, cId }) {
 			.catch(e => {
 				setError(e.message)
 			})
+			.finally(() => {
+				setLoading(false)
+			})
 	}
-	if (renderField) {
+	if (render) {
 		return(
-			<div>
-				<div className="h-12 my-4 mx-8 flex justify-between items-center">
-					<label className="w-1/2" htmlFor="eName">Expense Name:</label>
-					<input
-						onChange={e => setName(e.target.value)}
-						value={name}
-						placeholder="Expense Name"
-						className="w-1/2 h-10 p-2 border-2 border-gray-300 rounded-md" type="text" name="eName" id="eName"
-					/>
+			<React.Fragment>
+				<div className="h-58 relative">
+					<div className="h-58 w-80 absolute top-0 right-0 p-4 flex flex-col justify-center text-white z-10 bg-gray-500">
+						<input
+							value={name}
+							placeholder="expense name"
+							onChange={e => setName(e.target.value)}
+							className="text-[16px] h-12 p-2 my-2 text-black" />
+						<input
+							value={max}
+							placeholder="expense budget"
+							onChange={e => setMax(e.target.value)}
+							className="text-[16px] h-12 p-2 my-2 text-black" />
+						<button
+							onClick={createNewExpense}
+							className="h-10 my-2 text-[16px] flex justify-center items-center bg-primaryBlue rounded-sm hover:bg-blue-300">
+							{ loading ? <Spinner height={'1.8rem'} width={'1.8rem'} /> : "Create Expense " }
+						</button>
+						<button
+							onClick={handleClose}
+							className="h-10 my-2 text-[16px] bg-gray-400 rounded-sm hover:bg-gray-300">
+								Cancel
+							</button>
+					</div>
 				</div>
-				<div className="h-12 my-2 mx-8 flex justify-between items-center">
-					<label className="w-1/2" htmlFor="eMax">Monthly Budget:</label>
-					<input
-						onChange={e => setMax(e.target.value)}
-						value={max}
-						placeholder="Monthly Budget"
-						className="w-1/2 h-10 p-2 border-2 border-gray-300 rounded-md" type="text" name="eMax" id="eMax"
-					/>
-				</div>
-				<div className="text-red-500 text-center">
-					{error}
-				</div>
-				<div className="flex justify-center items-center">
-					<button onClick={createNewExpense} className="h-12 mx-8 mb-4 w-full border-2 border-blue-400 bg-blue-200 rounded hover:bg-blue-400" >Save</button>
-				</div>
-			</div>
+			</React.Fragment>
 		)
 	}
 	return null
