@@ -14,8 +14,14 @@ export default function Categories() {
 		<Protected>
 			<SiteWrapper>
 				<Header/>
-				<AddCategoryButton setRenderAddCategory={setRenderAddCategory} />
-				<AddCategoryField renderAddCategory={renderAddCategory} setRenderAddCategory={setRenderAddCategory} />
+				<AddCategoryButton
+					setRenderAddCategory={setRenderAddCategory}
+					renderAddCategory={renderAddCategory}
+				/>
+				<AddCategoryField
+					renderAddCategory={renderAddCategory}
+					setRenderAddCategory={setRenderAddCategory}
+				/>
 				<RenderCategories/>
 			</SiteWrapper>
 		</Protected>
