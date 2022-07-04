@@ -44,8 +44,10 @@ export default function NavigationModal() {
                     />
                 }
                 <Link onClick={handleModalClose} to="/" className={LINK_STYLES}>
-                    <FaHome className="ml-8 mr-4" size="27px" />
-                    <p>Home</p>
+                    <div className={LINK_STYLES}>
+                        <FaHome className="mr-4" size="30px" />
+                        <p>Home</p>
+                    </div>
                 </Link>
                 <Link onClick={handleModalClose} to="/transaction" className={LINK_STYLES}>
                     <div className={LINK_STYLES}>
