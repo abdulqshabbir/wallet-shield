@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import IndexPage from "./routes/Index"
-import Categories from "./routes/Categories"
+import EditCategories from "./routes/EditCategories"
 import Transaction from "./routes/Transaction"
 import Chart from "./routes/Chart"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
@@ -23,7 +23,7 @@ ReactDOM.render(
           <ModalProvider>
             <Routes>
                 <Route path="/" element={ <IndexPage /> } />
-                <Route path="/categories" element={ <Categories /> } />
+                <Route path="/edit-categories" element={ < EditCategories/> } />
                 <Route path="/transaction" element={ <Transaction /> } />
                 <Route path="/login" element={ <Login /> } />
                 <Route path="/signup" element={ <Signup /> } />

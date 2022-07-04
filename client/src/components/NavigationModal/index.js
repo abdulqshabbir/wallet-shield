@@ -55,7 +55,7 @@ export default function NavigationModal() {
                         <p>Add Transaction</p>
                     </div>
                 </Link>
-                <Link onClick={handleModalClose} to="/categories" className={LINK_STYLES}>
+                <Link onClick={handleModalClose} to="/edit-categories" className={LINK_STYLES}>
                     <div className={LINK_STYLES}>
                         <FiEdit className="mr-4" size="25px" />
                         <p>Edit Categories</p>
