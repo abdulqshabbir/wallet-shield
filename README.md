@@ -1,7 +1,3 @@
-# Expense Tracker
-## Live Site
-Site is live!  Find it at https://expense-tracker-ynab.herokuapp.com/
-
 ## App's Purpose
 This is a budgeting application that helps you become aware of what you spend, get out of debt, and take control of your financial freedom!
 
